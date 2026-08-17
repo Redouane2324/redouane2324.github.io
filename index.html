@@ -3,65 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SolPay Africa — Open-source Solana payment infrastructure for emerging markets.">
+
   <title>SolPay Africa | Solana Payments</title>
+
+  <meta name="description"
+        content="SolPay Africa is open-source payment infrastructure built on Solana for emerging markets.">
 
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #050509;
-      color: #fff;
+      color: #ffffff;
       line-height: 1.6;
     }
 
     nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 22px 8%;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      background: rgba(5,5,9,.92);
-      backdrop-filter: blur(10px);
-      z-index: 10;
+      padding: 20px 7%;
+      background: rgba(5,5,9,.94);
+      border-bottom: 1px solid #24242c;
+      backdrop-filter: blur(12px);
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 800;
     }
 
     .logo span {
-      color: #9945FF;
+      background: linear-gradient(90deg,#9945FF,#14F195);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     nav a {
       color: #aaa;
       text-decoration: none;
-      margin-left: 25px;
+      margin-left: 22px;
+      font-size: 14px;
     }
 
     nav a:hover {
-      color: #fff;
+      color: white;
     }
 
     .hero {
-      min-height: 90vh;
+      min-height: 88vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 80px 8%;
+      padding: 70px 6%;
       background:
-        radial-gradient(circle at 50% 20%, rgba(153,69,255,.22), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(20,241,149,.10), transparent 30%);
+        radial-gradient(circle at 50% 15%, rgba(153,69,255,.25), transparent 35%),
+        radial-gradient(circle at 85% 75%, rgba(20,241,149,.12), transparent 30%);
     }
 
     .hero-content {
@@ -79,67 +89,75 @@
     }
 
     h1 {
-      font-size: clamp(45px, 8vw, 85px);
+      font-size: clamp(44px, 8vw, 82px);
       line-height: 1.05;
       margin-bottom: 25px;
     }
 
     h1 span {
-      background: linear-gradient(90deg, #9945FF, #14F195);
+      background: linear-gradient(90deg,#9945FF,#14F195);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero p {
-      color: #aaa;
-      font-size: 20px;
       max-width: 700px;
       margin: auto;
+      color: #aaa;
+      font-size: 19px;
     }
 
     .buttons {
-      margin-top: 35px;
+      margin-top: 32px;
     }
 
     .btn {
       display: inline-block;
-      padding: 14px 25px;
+      border: none;
+      padding: 14px 23px;
       border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
       margin: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
     }
 
     .primary {
-      background: linear-gradient(90deg, #9945FF, #14F195);
+      background: linear-gradient(90deg,#9945FF,#14F195);
       color: #050509;
     }
 
     .secondary {
+      background: transparent;
       border: 1px solid #444;
       color: white;
     }
 
+    .secondary:hover {
+      border-color: #9945FF;
+    }
+
     section {
-      padding: 90px 8%;
       max-width: 1200px;
       margin: auto;
+      padding: 90px 7%;
     }
 
     .section-title {
-      font-size: 42px;
+      font-size: 40px;
       margin-bottom: 15px;
     }
 
     .section-text {
       color: #999;
-      max-width: 750px;
-      margin-bottom: 45px;
+      max-width: 760px;
+      margin-bottom: 40px;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3,1fr);
       gap: 20px;
     }
 
@@ -147,46 +165,83 @@
       background: #101016;
       border: 1px solid #24242d;
       border-radius: 18px;
-      padding: 30px;
+      padding: 28px;
     }
 
     .card h3 {
-      margin-bottom: 12px;
-      font-size: 22px;
+      margin-bottom: 10px;
     }
 
     .card p {
       color: #999;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 40px;
+    #wallet {
+      text-align: center;
     }
 
-    .stat {
-      text-align: center;
-      padding: 30px;
+    .wallet-box {
+      max-width: 650px;
+      margin: auto;
+      padding: 35px;
+      background: #101016;
+      border: 1px solid #292933;
+      border-radius: 22px;
+    }
+
+    .network {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 20px;
+      background: rgba(20,241,149,.12);
+      color: #14F195;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .wallet-address {
+      margin-top: 20px;
+      color: #aaa;
+      word-break: break-all;
+      font-size: 14px;
+    }
+
+    .balance {
+      margin-top: 12px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .status {
+      margin-top: 15px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 15px;
+    }
+
+    .roadmap div {
+      padding: 22px;
       border: 1px solid #24242d;
-      border-radius: 16px;
+      border-radius: 15px;
       background: #0d0d13;
     }
 
-    .stat strong {
+    .roadmap strong {
       display: block;
-      font-size: 38px;
-      background: linear-gradient(90deg, #9945FF, #14F195);
-      -webkit-background-clip: text;
-      color: transparent;
+      margin-bottom: 8px;
     }
 
     .cta {
       text-align: center;
+      padding: 60px 25px;
       border: 1px solid #292933;
       border-radius: 25px;
-      background: linear-gradient(135deg, #11101a, #0b1513);
+      background: linear-gradient(135deg,#11101a,#0b1513);
     }
 
     footer {
@@ -196,9 +251,10 @@
       color: #777;
     }
 
-    @media (max-width: 800px) {
+    @media(max-width:800px) {
+
       nav {
-        padding: 18px 5%;
+        padding: 17px 5%;
       }
 
       nav div:last-child {
@@ -210,12 +266,16 @@
       }
 
       .cards,
-      .stats {
+      .roadmap {
         grid-template-columns: 1fr;
       }
 
       .hero {
-        padding: 60px 6%;
+        min-height: 80vh;
+      }
+
+      .wallet-box {
+        padding: 25px 18px;
       }
     }
   </style>
@@ -223,110 +283,500 @@
 
 <body>
 
-  <nav>
-    <div class="logo">Sol<span>Pay</span> Africa</div>
+<nav>
+
+  <div class="logo">
+    Sol<span>Pay</span> Africa
+  </div>
+
+  <div>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#wallet">Wallet</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="https://github.com/Redouane2324"
+       target="_blank">
+       GitHub
+    </a>
+  </div>
+
+</nav>
+
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      Built on Solana • Devnet MVP
+    </div>
+
+    <h1>
+      Simple Payments for
+      <span>Africa</span>
+    </h1>
+
+    <p>
+      SolPay Africa is building open-source payment
+      infrastructure designed to make Solana payments
+      simple and accessible for businesses and consumers
+      in emerging markets.
+    </p>
+
+    <div class="buttons">
+
+      <a class="btn primary" href="#wallet">
+        Connect Wallet
+      </a>
+
+      <a class="btn secondary"
+         href="https://github.com/Redouane2324"
+         target="_blank">
+        View GitHub
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="about">
+
+  <h2 class="section-title">
+    What we're building
+  </h2>
+
+  <p class="section-text">
+    SolPay Africa aims to provide simple, reusable and
+    open-source payment infrastructure for merchants
+    and developers across emerging markets.
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>⚡ Fast Payments</h3>
+      <p>
+        Built around Solana's high-performance blockchain
+        for efficient digital payments.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🌍 Africa First</h3>
+      <p>
+        Starting with Algeria and designed with broader
+        African adoption in mind.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🔓 Open Source</h3>
+      <p>
+        Core infrastructure and developer resources
+        will be made available to the community.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="features">
+
+  <h2 class="section-title">
+    Core Features
+  </h2>
+
+  <p class="section-text">
+    Our MVP focuses on the basic infrastructure required
+    to create a simple Solana payment experience.
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>🔗 Wallet Connection</h3>
+      <p>
+        Connect compatible Solana wallets directly
+        to the web application.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>📱 QR Payments</h3>
+      <p>
+        Generate simple payment requests that can be
+        scanned by users.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🔎 Verification</h3>
+      <p>
+        Verify payment transactions directly on the
+        Solana blockchain.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="wallet">
+
+  <h2 class="section-title">
+    Solana Wallet
+  </h2>
+
+  <p class="section-text" style="margin-left:auto;margin-right:auto;">
+    Connect your wallet to test the SolPay Africa MVP
+    on Solana Devnet.
+  </p>
+
+  <div class="wallet-box">
+
+    <div class="network">
+      SOLANA DEVNET
+    </div>
+
+    <br>
+
+    <button
+      id="connectWallet"
+      class="btn primary">
+      Connect Wallet
+    </button>
+
+    <button
+      id="disconnectWallet"
+      class="btn secondary"
+      style="display:none;">
+      Disconnect
+    </button>
+
+    <div
+      id="walletAddress"
+      class="wallet-address">
+      Wallet not connected
+    </div>
+
+    <div
+      id="walletBalance"
+      class="balance">
+    </div>
+
+    <div
+      id="walletStatus"
+      class="status">
+      Waiting for wallet connection...
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="roadmap">
+
+  <h2 class="section-title">
+    30-Day MVP Roadmap
+  </h2>
+
+  <p class="section-text">
+    Our initial development plan focuses on building,
+    testing and publicly releasing the core infrastructure.
+  </p>
+
+  <div class="roadmap">
 
     <div>
-      <a href="#about">About</a>
-      <a href="#features">Features</a>
-      <a href="#team">Team</a>
-      <a href="https://github.com/Redouane2324" target="_blank">GitHub</a>
+      <strong>Week 1</strong>
+      Architecture, UX/UI and Solana Devnet integration.
     </div>
-  </nav>
 
-  <main>
+    <div>
+      <strong>Week 2</strong>
+      Payment requests, wallet connection and verification.
+    </div>
 
-    <section class="hero">
-      <div class="hero-content">
-        <div class="badge">Built on Solana</div>
+    <div>
+      <strong>Week 3</strong>
+      Merchant dashboard and developer API.
+    </div>
 
-        <h1>
-          Payments for<br>
-          <span>Africa's Future</span>
-        </h1>
+    <div>
+      <strong>Week 4</strong>
+      Testing, documentation and public MVP release.
+    </div>
 
-        <p>
-          SolPay Africa is building open-source Solana payment
-          infrastructure designed for emerging markets.
-        </p>
+  </div>
 
-        <div class="buttons">
-          <a class="btn primary" href="#about">Discover SolPay</a>
-          <a class="btn secondary"
-             href="https://github.com/Redouane2324"
-             target="_blank">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-    </section>
+</section>
 
-    <section id="about">
-      <h2 class="section-title">What we're building</h2>
 
-      <p class="section-text">
-        SolPay Africa aims to make blockchain payments easier,
-        faster and more accessible for consumers and businesses
-        across emerging markets.
-      </p>
+<section>
 
-      <div class="cards">
+  <div class="cta">
 
-        <div class="card">
-          <h3>⚡ Fast Payments</h3>
-          <p>
-            Leveraging Solana's high-performance blockchain
-            for efficient digital payments.
-          </p>
-        </div>
+    <h2 class="section-title">
+      Build the future of payments
+    </h2>
 
-        <div class="card">
-          <h3>🌍 Africa First</h3>
-          <p>
-            Designed with the needs of African consumers,
-            businesses and emerging markets in mind.
-          </p>
-        </div>
+    <p class="section-text"
+       style="margin:0 auto 25px;">
+      Follow the development of SolPay Africa
+      through our open-source repository.
+    </p>
 
-        <div class="card">
-          <h3>🔓 Open Source</h3>
-          <p>
-            Building transparent infrastructure that can
-            be improved and adopted by the community.
-          </p>
-        </div>
+    <a
+      class="btn primary"
+      href="https://github.com/Redouane2324"
+      target="_blank">
+      Explore GitHub
+    </a>
 
-      </div>
-    </section>
+  </div>
 
-    <section id="features">
-      <h2 class="section-title">Why SolPay?</h2>
+</section>
 
-      <p class="section-text">
-        Our goal is to connect everyday users with modern
-        blockchain payment infrastructure without unnecessary complexity.
-      </p>
 
-      <div class="stats">
-        <div class="stat">
-          <strong>Solana</strong>
-          Blockchain
-        </div>
+<footer>
 
-        <div class="stat">
-          <strong>Open</strong>
-          Infrastructure
-        </div>
+  © 2026 SolPay Africa
+  <br>
+  Open-source Solana payment infrastructure.
 
-        <div class="stat">
-          <strong>Africa</strong>
-          First
-        </div>
-      </div>
-    </section>
+</footer>
 
-    <section id="team">
-      <h2 class="section-title">Our Team</h2>
 
-      <p class="section-text">
-        SolPay Africa is being developed by a
+<script>
+
+  const connectButton =
+    document.getElementById("connectWallet");
+
+  const disconnectButton =
+    document.getElementById("disconnectWallet");
+
+  const addressElement =
+    document.getElementById("walletAddress");
+
+  const balanceElement =
+    document.getElementById("walletBalance");
+
+  const statusElement =
+    document.getElementById("walletStatus");
+
+
+  function getProvider() {
+
+    if (window.phantom &&
+        window.phantom.solana) {
+
+      return window.phantom.solana;
+
+    }
+
+    if (window.solana &&
+        window.solana.isPhantom) {
+
+      return window.solana;
+
+    }
+
+    return null;
+  }
+
+
+  function shortenAddress(address) {
+
+    return address.slice(0,6)
+      + "..."
+      + address.slice(-6);
+
+  }
+
+
+  async function getBalance(publicKey) {
+
+    try {
+
+      const response =
+        await fetch(
+          "https://api.devnet.solana.com",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+              jsonrpc: "2.0",
+
+              id: 1,
+
+              method: "getBalance",
+
+              params: [
+                publicKey
+              ]
+
+            })
+
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (data.result) {
+
+        const lamports =
+          data.result.value;
+
+        const sol =
+          lamports / 1000000000;
+
+        balanceElement.textContent =
+          sol.toFixed(4) + " SOL";
+
+      }
+
+    } catch (error) {
+
+      balanceElement.textContent =
+        "Balance unavailable";
+
+    }
+
+  }
+
+
+  async function connectWallet() {
+
+    const provider =
+      getProvider();
+
+
+    if (!provider) {
+
+      statusElement.textContent =
+        "Phantom wallet not detected. Please install Phantom.";
+
+      window.open(
+        "https://phantom.app/",
+        "_blank"
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      statusElement.textContent =
+        "Connecting...";
+
+
+      const response =
+        await provider.connect();
+
+
+      const publicKey =
+        response.publicKey.toString();
+
+
+      addressElement.textContent =
+        "Connected: "
+        + shortenAddress(publicKey);
+
+
+      statusElement.textContent =
+        "Connected to Solana Devnet";
+
+
+      connectButton.style.display =
+        "none";
+
+      disconnectButton.style.display =
+        "inline-block";
+
+
+      await getBalance(publicKey);
+
+
+    } catch (error) {
+
+      statusElement.textContent =
+        "Wallet connection cancelled.";
+
+    }
+
+  }
+
+
+  async function disconnectWallet() {
+
+    const provider =
+      getProvider();
+
+
+    if (provider) {
+
+      try {
+
+        await provider.disconnect();
+
+      } catch (error) {}
+
+    }
+
+
+    addressElement.textContent =
+      "Wallet not connected";
+
+
+    balanceElement.textContent =
+      "";
+
+
+    statusElement.textContent =
+      "Waiting for wallet connection...";
+
+
+    connectButton.style.display =
+      "inline-block";
+
+
+    disconnectButton.style.display =
+      "none";
+
+  }
+
+
+  connectButton.addEventListener(
+    "click",
+    connectWallet
+  );
+
+
+  disconnectButton.addEventListener(
+    "click",
+    disconnectWallet
+  );
+
+</script>
+
+</body>
+</html>
+    
