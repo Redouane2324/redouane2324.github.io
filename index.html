@@ -2,269 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SolPay Africa | Solana Payments</title>
 
-<meta name="description"
-content="SolPay Africa - Open-source Solana payment infrastructure for emerging markets.">
-
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #050509;
-  color: #fff;
-  line-height: 1.6;
-}
-
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 7%;
-  background: rgba(5,5,9,.95);
-  border-bottom: 1px solid #24242c;
-  backdrop-filter: blur(12px);
-}
-
-.logo {
-  font-size: 23px;
-  font-weight: 800;
-}
-
-.logo span {
-  background: linear-gradient(90deg,#9945FF,#14F195);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-nav a {
-  color: #aaa;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 14px;
-}
-
-.hero {
-  min-height: 88vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 70px 6%;
-  background:
-    radial-gradient(circle at 50% 15%, rgba(153,69,255,.25), transparent 35%),
-    radial-gradient(circle at 85% 75%, rgba(20,241,149,.12), transparent 30%);
-}
-
-.hero-content {
-  max-width: 900px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 8px 16px;
-  border: 1px solid #9945FF;
-  border-radius: 30px;
-  color: #c9a7ff;
-  margin-bottom: 25px;
-  font-size: 14px;
-}
-
-h1 {
-  font-size: clamp(44px,8vw,82px);
-  line-height: 1.05;
-  margin-bottom: 25px;
-}
-
-h1 span {
-  background: linear-gradient(90deg,#9945FF,#14F195);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.hero p {
-  max-width: 700px;
-  margin: auto;
-  color: #aaa;
-  font-size: 19px;
-}
-
-.buttons {
-  margin-top: 32px;
-}
-
-.btn {
-  display: inline-block;
-  border: none;
-  padding: 14px 23px;
-  border-radius: 10px;
-  margin: 6px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.primary {
-  background: linear-gradient(90deg,#9945FF,#14F195);
-  color: #050509;
-}
-
-.secondary {
-  background: transparent;
-  border: 1px solid #444;
-  color: white;
-}
-
-section {
-  max-width: 1200px;
-  margin: auto;
-  padding: 90px 7%;
-}
-
-.section-title {
-  font-size: 40px;
-  margin-bottom: 15px;
-}
-
-.section-text {
-  color: #999;
-  max-width: 760px;
-  margin-bottom: 40px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
-}
-
-.card {
-  background: #101016;
-  border: 1px solid #24242d;
-  border-radius: 18px;
-  padding: 28px;
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: #999;
-}
-
-#wallet {
-  text-align: center;
-}
-
-.wallet-box {
-  max-width: 650px;
-  margin: auto;
-  padding: 35px;
-  background: #101016;
-  border: 1px solid #292933;
-  border-radius: 22px;
-}
-
-.network {
-  display: inline-block;
-  padding: 7px 14px;
-  border-radius: 20px;
-  background: rgba(20,241,149,.12);
-  color: #14F195;
-  margin-bottom: 20px;
-  font-size: 13px;
-}
-
-.wallet-address {
-  margin-top: 20px;
-  color: #aaa;
-  word-break: break-all;
-  font-size: 14px;
-}
-
-.balance {
-  margin-top: 12px;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.status {
-  margin-top: 15px;
-  color: #888;
-  font-size: 14px;
-}
-
-.roadmap {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 15px;
-}
-
-.roadmap div {
-  padding: 22px;
-  border: 1px solid #24242d;
-  border-radius: 15px;
-  background: #0d0d13;
-}
-
-.roadmap strong {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.cta {
-  text-align: center;
-  padding: 60px 25px;
-  border: 1px solid #292933;
-  border-radius: 25px;
-  background: linear-gradient(135deg,#11101a,#0b1513);
-}
-
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  border-top: 1px solid #222;
-  color: #777;
-}
-
-@media(max-width:800px) {
-
-  nav {
-    padding: 17px 5%;
-  }
-
-  nav div:last-child {
-    display: none;
-  }
-
-  section {
-    padding: 65px 6%;
-  }
-
-  .cards,
-  .roadmap {
-    grid-template-columns: 1fr;
-  }
-
-  .wallet-box {
-    padding: 25px 18px;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#050509;color:#fff;line-height:1.6}
+nav{position:sticky;top:0;z-index:10;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;background:#08080d;border-bottom:1px solid #252530}
+.logo{font-size:23px;font-weight:bold}
+.logo span{background:linear-gradient(90deg,#9945ff,#14f195);-webkit-background-clip:text;color:transparent}
+nav a{color:#aaa;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{text-align:center;padding:90px 6%;background:radial-gradient(circle at 50% 10%,#301653,transparent 45%)}
+.badge{display:inline-block;border:1px solid #9945ff;border-radius:30px;padding:7px 15px;color:#c9a7ff;margin-bottom:20px}
+h1{font-size:clamp(42px,8vw,80px);line-height:1.05;margin-bottom:20px}
+h1 span{background:linear-gradient(90deg,#9945ff,#14f195);-webkit-background-clip:text;color:transparent}
+.hero p,.section-text{color:#999;max-width:750px;margin:0 auto 25px}
+.btn{border:0;border-radius:10px;padding:13px 21px;margin:5px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}
+.primary{background:linear-gradient(90deg,#9945ff,#14f195);color:#050509}
+.secondary{background:#111118;color:#fff;border:1px solid #333}
+section{max-width:1200px;margin:auto;padding:70px 6%}
+h2{font-size:36px;margin-bottom:12px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card,.panel{background:#101016;border:1px solid #292933;border-radius:18px;padding:25px}
+.card p{color:#999}
+.wallet{text-align:center;max-width:650px;margin:auto}
+.network{color:#14f195;background:#10251e;display:inline-block;padding:6px 13px;border-radius:20px;font-size:13px;margin-bottom:15px}
+.address,.status{color:#999;margin-top:12px;word-break:break-all}
+.balance{font-size:25px;font-weight:bold;margin-top:10px}
+input,select{width:100%;padding:14px;margin:7px 0 15px;background:#08080d;color:#fff;border:1px solid #333;border-radius:9px;font-size:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.qr{text-align:center;margin-top:25px}
+.qr img{width:220px;height:220px;background:white;padding:10px;border-radius:12px;display:none;margin:15px auto}
+.payment-link{word-break:break-all;color:#aaa;margin:10px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.stat{background:#101016;border:1px solid #292933;border-radius:15px;padding:20px}
+.stat strong{font-size:25px;display:block}
+.stat span{color:#888;font-size:13px}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:13px;border-bottom:1px solid #292933}
+th{color:#aaa}
+td{font-size:14px}
+.verify{margin-top:25px}
+small{color:#777}
+footer{text-align:center;padding:35px;border-top:1px solid #222;color:#777}
+@media(max-width:800px){
+nav div:last-child{display:none}
+.cards,.stats,.form-grid{grid-template-columns:1fr}
+section{padding:55px 5%}
 }
 </style>
 </head>
@@ -272,230 +56,201 @@ footer {
 <body>
 
 <nav>
-
-<div class="logo">
-Sol<span>Pay</span> Africa
-</div>
-
+<div class="logo">Sol<span>Pay</span> Africa</div>
 <div>
-<a href="#about">About</a>
-<a href="#features">Features</a>
-<a href="#wallet">Wallet</a>
-<a href="#roadmap">Roadmap</a>
-<a href="https://github.com/Redouane2324" target="_blank">
-GitHub
-</a>
+<a href="#payment">Payment</a>
+<a href="#dashboard">Dashboard</a>
+<a href="#verify">Verify</a>
+<a href="https://github.com/Redouane2324" target="_blank">GitHub</a>
 </div>
-
 </nav>
 
-
 <section class="hero">
-
-<div class="hero-content">
-
-<div class="badge">
-Built on Solana • Devnet MVP
-</div>
+<div>
+<div class="badge">Solana Devnet • MVP</div>
 
 <h1>
-Simple Payments for
-<span>Africa</span>
+Simple Payments for <span>Africa</span>
 </h1>
 
 <p>
-SolPay Africa is building open-source payment
-infrastructure designed to make Solana payments
-simple and accessible for businesses and consumers
-in emerging markets.
+SolPay Africa is building open-source payment infrastructure
+designed to make Solana payments simple and accessible
+for businesses and consumers in emerging markets.
 </p>
 
-<div class="buttons">
-
-<a class="btn primary" href="#wallet">
-Connect Wallet
-</a>
-
-<a class="btn secondary"
-href="https://github.com/Redouane2324"
-target="_blank">
-View GitHub
-</a>
-
+<a class="btn primary" href="#payment">Create Payment</a>
+<a class="btn secondary" href="#dashboard">Merchant Dashboard</a>
 </div>
-
-</div>
-
-</section>
-
-
-<section id="about">
-
-<h2 class="section-title">
-What we're building
-</h2>
-
-<p class="section-text">
-SolPay Africa aims to provide simple, reusable and
-open-source payment infrastructure for merchants
-and developers across emerging markets.
-</p>
-
-<div class="cards">
-
-<div class="card">
-<h3>⚡ Fast Payments</h3>
-<p>
-Built around Solana's high-performance blockchain
-for efficient digital payments.
-</p>
-</div>
-
-<div class="card">
-<h3>🌍 Africa First</h3>
-<p>
-Starting with Algeria and designed with broader
-African adoption in mind.
-</p>
-</div>
-
-<div class="card">
-<h3>🔓 Open Source</h3>
-<p>
-Core infrastructure and developer resources
-will be available to the community.
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="features">
-
-<h2 class="section-title">
-Core Features
-</h2>
-
-<p class="section-text">
-Our MVP focuses on the basic infrastructure required
-to create a simple Solana payment experience.
-</p>
-
-<div class="cards">
-
-<div class="card">
-<h3>🔗 Wallet Connection</h3>
-<p>
-Connect compatible Solana wallets to the application.
-</p>
-</div>
-
-<div class="card">
-<h3>📱 QR Payments</h3>
-<p>
-Generate simple payment requests that can be scanned.
-</p>
-</div>
-
-<div class="card">
-<h3>🔎 Verification</h3>
-<p>
-Verify payment transactions on the Solana blockchain.
-</p>
-</div>
-
-</div>
-
 </section>
 
 
 <section id="wallet">
 
-<h2 class="section-title">
-Solana Wallet
-</h2>
+<h2>Wallet</h2>
 
-<p class="section-text" style="margin-left:auto;margin-right:auto;">
-Connect your wallet to test SolPay Africa on
-Solana Devnet.
+<p class="section-text">
+Connect a Solana wallet to test the SolPay Africa MVP.
 </p>
 
-<div class="wallet-box">
+<div class="panel wallet">
 
-<div class="network">
-SOLANA DEVNET
-</div>
+<div class="network">SOLANA DEVNET</div>
 
 <br>
 
-<button
-id="connectWallet"
-class="btn primary">
+<button id="connect" class="btn primary">
 Connect Wallet
 </button>
 
-<button
-id="disconnectWallet"
-class="btn secondary"
-style="display:none;">
+<button id="disconnect" class="btn secondary" style="display:none">
 Disconnect
 </button>
 
-<div
-id="walletAddress"
-class="wallet-address">
+<div id="address" class="address">
 Wallet not connected
 </div>
 
-<div
-id="walletBalance"
-class="balance">
+<div id="balance" class="balance"></div>
+
+<div id="walletStatus" class="status">
+Waiting for connection...
 </div>
 
-<div
-id="walletStatus"
-class="status">
-Waiting for wallet connection...
 </div>
+</section>
+
+
+<section id="payment">
+
+<h2>Create Payment Request</h2>
+
+<p class="section-text">
+Create a payment request and generate a QR code.
+</p>
+
+<div class="panel">
+
+<label>Amount</label>
+<input id="amount" type="number" min="0" step="0.000001"
+placeholder="Enter amount">
+
+<label>Currency</label>
+<select id="currency">
+<option value="SOL">SOL</option>
+<option value="USDC">USDC</option>
+</select>
+
+<label>Description</label>
+<input id="description"
+placeholder="Example: Product payment">
+
+<label>Merchant Wallet</label>
+<input id="merchant"
+placeholder="Paste your Solana public wallet address">
+
+<button class="btn primary" onclick="createPayment()">
+Generate Payment
+</button>
+
+<div id="paymentResult" style="display:none">
+
+<div class="qr">
+<h3>Payment QR</h3>
+
+<img id="qrImage" alt="Payment QR">
+
+<div id="paymentLink" class="payment-link"></div>
+
+<button class="btn secondary" onclick="copyPaymentLink()">
+Copy Payment Link
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section id="dashboard">
+
+<h2>Merchant Dashboard</h2>
+
+<p class="section-text">
+Monitor payment requests created from this browser.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong id="totalRequests">0</strong>
+<span>Total Requests</span>
+</div>
+
+<div class="stat">
+<strong id="totalAmount">0</strong>
+<span>Total Amount</span>
+</div>
+
+<div class="stat">
+<strong id="pendingCount">0</strong>
+<span>Pending</span>
+</div>
+
+<div class="stat">
+<strong id="paidCount">0</strong>
+<span>Paid</span>
+</div>
+
+</div>
+
+<div class="panel">
+
+<table>
+
+<thead>
+<tr>
+<th>Amount</th>
+<th>Currency</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="paymentTable">
+</tbody>
+
+</table>
 
 </div>
 
 </section>
 
 
-<section id="roadmap">
+<section id="verify">
 
-<h2 class="section-title">
-30-Day MVP Roadmap
-</h2>
+<h2>Verify Solana Transaction</h2>
 
 <p class="section-text">
-Our initial development plan focuses on building,
-testing and publicly releasing the core infrastructure.
+Enter a Solana transaction signature to verify a payment.
+Blockchain verification will be connected to the backend
+in the next development phase.
 </p>
 
-<div class="roadmap">
+<div class="panel">
 
-<div>
-<strong>Week 1</strong>
-Architecture, UX/UI and Solana Devnet integration.
-</div>
+<input id="signature"
+placeholder="Transaction signature">
 
-<div>
-<strong>Week 2</strong>
-Payment requests, wallet connection and verification.
-</div>
+<button class="btn primary"
+onclick="verifyTransaction()">
+Verify Transaction
+</button>
 
-<div>
-<strong>Week 3</strong>
-Merchant dashboard and developer API.
-</div>
-
-<div>
-<strong>Week 4</strong>
-Testing, documentation and public MVP release.
+<div id="verifyResult" class="status">
+No transaction checked yet.
 </div>
 
 </div>
@@ -505,24 +260,18 @@ Testing, documentation and public MVP release.
 
 <section>
 
-<div class="cta">
+<div class="panel" style="text-align:center">
 
-<h2 class="section-title">
-Build the future of payments
-</h2>
+<h2>SolPay Africa Roadmap</h2>
 
-<p class="section-text"
-style="margin:0 auto 25px;">
-Follow the development of SolPay Africa
-through our open-source repository.
+<p class="section-text">
+Wallet → Payment Requests → QR → Verification →
+Merchant Dashboard → Developer API
 </p>
 
-<a
-class="btn primary"
-href="https://github.com/Redouane2324"
-target="_blank">
-Explore GitHub
-</a>
+<small>
+Current version: MVP / Solana Devnet
+</small>
 
 </div>
 
@@ -530,54 +279,31 @@ Explore GitHub
 
 
 <footer>
-
-© 2026 SolPay Africa
-<br>
+© 2026 SolPay Africa<br>
 Open-source Solana payment infrastructure.
-
 </footer>
 
 
 <script>
 
-const connectButton =
-document.getElementById("connectWallet");
+/* =========================
+   WALLET
+========================= */
 
-const disconnectButton =
-document.getElementById("disconnectWallet");
+let provider = null;
 
-const addressElement =
-document.getElementById("walletAddress");
+function getProvider(){
 
-const balanceElement =
-document.getElementById("walletBalance");
-
-const statusElement =
-document.getElementById("walletStatus");
-
-
-function getProvider() {
-
-if (window.phantom &&
-window.phantom.solana) {
-
+if(window.phantom && window.phantom.solana)
 return window.phantom.solana;
 
-}
-
-if (window.solana &&
-window.solana.isPhantom) {
-
+if(window.solana && window.solana.isPhantom)
 return window.solana;
 
-}
-
 return null;
-
 }
 
-
-function isMobile() {
+function mobile(){
 
 return /Android|iPhone|iPad|iPod/i.test(
 navigator.userAgent
@@ -585,130 +311,33 @@ navigator.userAgent
 
 }
 
+function shortAddress(address){
 
-function shortenAddress(address) {
-
-return address.slice(0,6)
-+ "..."
-+ address.slice(-6);
-
-}
-
-
-/*
-Open the website inside Phantom on mobile.
-This avoids sending the user to the normal
-Phantom download page.
-*/
-
-function openPhantomMobile() {
-
-const currentUrl =
-window.location.href;
-
-const encodedUrl =
-encodeURIComponent(currentUrl);
-
-const phantomUrl =
-"https://phantom.app/ul/browse/"
-+ encodedUrl
-+ "?ref="
-+ encodedUrl;
-
-window.location.href =
-phantomUrl;
+return address.substring(0,6)
++"..."
++address.substring(address.length-6);
 
 }
 
+async function connectWallet(){
 
-async function getBalance(publicKey) {
+provider=getProvider();
 
-try {
+if(!provider){
 
-const response =
-await fetch(
-"https://api.devnet.solana.com",
-{
-method:"POST",
+if(mobile()){
 
-headers:{
-"Content-Type":
-"application/json"
-},
-
-body:JSON.stringify({
-
-jsonrpc:"2.0",
-
-id:1,
-
-method:"getBalance",
-
-params:[
-publicKey
-]
-
-})
-
-}
+const url=encodeURIComponent(
+window.location.href
 );
 
-
-const data =
-await response.json();
-
-
-if(data.result) {
-
-const lamports =
-data.result.value;
-
-const sol =
-lamports / 1000000000;
-
-balanceElement.textContent =
-sol.toFixed(4)
-+ " SOL";
-
-}
-
-}
-catch(error) {
-
-balanceElement.textContent =
-"Balance unavailable";
-
-}
-
-}
-
-
-async function connectWallet() {
-
-const provider =
-getProvider();
-
-
-/*
-If Phantom is not injected,
-open Phantom mobile browser.
-*/
-
-if(!provider) {
-
-if(isMobile()) {
-
-statusElement.textContent =
-"Opening Phantom...";
-
-openPhantomMobile();
+window.location.href=
+"https://phantom.app/ul/browse/"
++url+"?ref="+url;
 
 return;
 
 }
-
-statusElement.textContent =
-"Please install Phantom.";
 
 window.open(
 "https://phantom.app/",
@@ -719,102 +348,347 @@ return;
 
 }
 
+try{
 
-try {
+const result=await provider.connect();
 
-statusElement.textContent =
-"Connecting to Phantom...";
+const address=result.publicKey.toString();
 
+document.getElementById("address").textContent=
+"Connected: "+shortAddress(address);
 
-const response =
-await provider.connect();
-
-
-const publicKey =
-response.publicKey.toString();
-
-
-addressElement.textContent =
-"Connected: "
-+ shortenAddress(publicKey);
-
-
-statusElement.textContent =
+document.getElementById("walletStatus").textContent=
 "Connected to Solana Devnet";
 
+document.getElementById("connect").style.display="none";
 
-connectButton.style.display =
-"none";
+document.getElementById("disconnect").style.display="inline-block";
 
-disconnectButton.style.display =
-"inline-block";
+await getBalance(address);
 
+}catch(error){
 
-await getBalance(publicKey);
-
-
-}
-catch(error) {
-
-console.error(error);
-
-statusElement.textContent =
-"Wallet connection cancelled.";
+document.getElementById("walletStatus").textContent=
+"Connection cancelled.";
 
 }
 
 }
 
+async function getBalance(address){
 
-async function disconnectWallet() {
+try{
 
-const provider =
-getProvider();
+const response=await fetch(
+"https://api.devnet.solana.com",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+jsonrpc:"2.0",
+id:1,
+method:"getBalance",
+params:[address]
+})
+}
+);
 
+const data=await response.json();
 
-if(provider) {
+if(data.result){
 
-try {
+const sol=
+data.result.value/1000000000;
 
+document.getElementById("balance").textContent=
+sol.toFixed(4)+" SOL";
+
+}
+
+}catch(e){
+
+document.getElementById("balance").textContent=
+"Balance unavailable";
+
+}
+
+}
+
+async function disconnectWallet(){
+
+if(provider){
+
+try{
 await provider.disconnect();
+}catch(e){}
 
 }
-catch(error) {}
 
-}
-
-
-addressElement.textContent =
+document.getElementById("address").textContent=
 "Wallet not connected";
 
-balanceElement.textContent =
-"";
+document.getElementById("balance").textContent="";
 
-statusElement.textContent =
-"Waiting for wallet connection...";
+document.getElementById("walletStatus").textContent=
+"Waiting for connection...";
 
-connectButton.style.display =
+document.getElementById("connect").style.display=
 "inline-block";
 
-disconnectButton.style.display =
+document.getElementById("disconnect").style.display=
 "none";
 
 }
 
+document.getElementById("connect")
+.addEventListener("click",connectWallet);
 
-connectButton.addEventListener(
-"click",
-connectWallet
+document.getElementById("disconnect")
+.addEventListener("click",disconnectWallet);
+
+
+/* =========================
+   PAYMENT REQUESTS
+========================= */
+
+function getPayments(){
+
+return JSON.parse(
+localStorage.getItem("solpayPayments") || "[]"
 );
 
+}
 
-disconnectButton.addEventListener(
-"click",
-disconnectWallet
+function savePayments(data){
+
+localStorage.setItem(
+"solpayPayments",
+JSON.stringify(data)
 );
+
+}
+
+function createPayment(){
+
+const amount=
+document.getElementById("amount").value;
+
+const currency=
+document.getElementById("currency").value;
+
+const description=
+document.getElementById("description").value;
+
+const merchant=
+document.getElementById("merchant").value.trim();
+
+if(!amount || Number(amount)<=0){
+
+alert("Please enter a valid amount.");
+
+return;
+
+}
+
+if(!merchant){
+
+alert("Please enter the merchant wallet address.");
+
+return;
+
+}
+
+const payment={
+
+id:
+"SP-"+Date.now(),
+
+amount:Number(amount),
+
+currency:currency,
+
+description:
+description || "SolPay Payment",
+
+merchant:merchant,
+
+status:"Pending",
+
+created:new Date().toISOString()
+
+};
+
+const payments=getPayments();
+
+payments.unshift(payment);
+
+savePayments(payments);
+
+const params=
+"solpay://pay"
++"?amount="+encodeURIComponent(payment.amount)
++"&currency="+encodeURIComponent(payment.currency)
++"&merchant="+encodeURIComponent(payment.merchant)
++"&id="+encodeURIComponent(payment.id);
+
+const link=
+window.location.origin
++window.location.pathname
++"?payment="+encodeURIComponent(params);
+
+document.getElementById("paymentResult").style.display="block";
+
+document.getElementById("paymentLink").textContent=link;
+
+const qr=
+"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
++encodeURIComponent(link);
+
+const image=
+document.getElementById("qrImage");
+
+image.src=qr;
+image.style.display="block";
+
+renderDashboard();
+
+}
+
+
+/* =========================
+   COPY PAYMENT LINK
+========================= */
+
+async function copyPaymentLink(){
+
+const link=
+document.getElementById("paymentLink").textContent;
+
+try{
+
+await navigator.clipboard.writeText(link);
+
+alert("Payment link copied.");
+
+}catch(e){
+
+alert("Copy failed. Please copy the link manually.");
+
+}
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function renderDashboard(){
+
+const payments=getPayments();
+
+document.getElementById("totalRequests").textContent=
+payments.length;
+
+let total=0;
+let pending=0;
+let paid=0;
+
+payments.forEach(p=>{
+
+total+=Number(p.amount);
+
+if(p.status==="Pending") pending++;
+
+if(p.status==="Paid") paid++;
+
+});
+
+document.getElementById("totalAmount").textContent=
+total.toFixed(4);
+
+document.getElementById("pendingCount").textContent=
+pending;
+
+document.getElementById("paidCount").textContent=
+paid;
+
+const table=
+document.getElementById("paymentTable");
+
+table.innerHTML="";
+
+payments.forEach(p=>{
+
+const row=document.createElement("tr");
+
+row.innerHTML=
+"<td>"+p.amount+"</td>"
++"<td>"+p.currency+"</td>"
++"<td>"+escapeHtml(p.description)+"</td>"
++"<td>"+p.status+"</td>";
+
+table.appendChild(row);
+
+});
+
+}
+
+function escapeHtml(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/* =========================
+   TRANSACTION VERIFICATION
+========================= */
+
+async function verifyTransaction(){
+
+const signature=
+document.getElementById("signature").value.trim();
+
+const result=
+document.getElementById("verifyResult");
+
+if(!signature){
+
+result.textContent=
+"Please enter a transaction signature.";
+
+return;
+
+}
+
+/*
+Future phase:
+Connect this function to Solana RPC/backend
+to verify transaction details, amount,
+recipient and confirmation status.
+*/
+
+result.textContent=
+"Signature received. On-chain verification will be connected in the next backend phase.";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderDashboard();
 
 </script>
 
 </body>
 </html>
-    
