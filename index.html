@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SolPay Africa — Open-source Solana payment infrastructure for emerging markets.">
+  <title>SolPay Africa | Solana Payments</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #050509;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 8%;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      background: rgba(5,5,9,.92);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #9945FF;
+    }
+
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 25px;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 8%;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(153,69,255,.22), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(20,241,149,.10), transparent 30%);
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid #9945FF;
+      border-radius: 30px;
+      color: #c9a7ff;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: clamp(45px, 8vw, 85px);
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #9945FF, #14F195);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .buttons {
+      margin-top: 35px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 25px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 6px;
+    }
+
+    .primary {
+      background: linear-gradient(90deg, #9945FF, #14F195);
+      color: #050509;
+    }
+
+    .secondary {
+      border: 1px solid #444;
+      color: white;
+    }
+
+    section {
+      padding: 90px 8%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .section-text {
+      color: #999;
+      max-width: 750px;
+      margin-bottom: 45px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #101016;
+      border: 1px solid #24242d;
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #999;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 30px;
+      border: 1px solid #24242d;
+      border-radius: 16px;
+      background: #0d0d13;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 38px;
+      background: linear-gradient(90deg, #9945FF, #14F195);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .cta {
+      text-align: center;
+      border: 1px solid #292933;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #11101a, #0b1513);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #222;
+      color: #777;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        padding: 18px 5%;
+      }
+
+      nav div:last-child {
+        display: none;
+      }
+
+      section {
+        padding: 65px 6%;
+      }
+
+      .cards,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 60px 6%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">Sol<span>Pay</span> Africa</div>
+
+    <div>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#team">Team</a>
+      <a href="https://github.com/Redouane2324" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="badge">Built on Solana</div>
+
+        <h1>
+          Payments for<br>
+          <span>Africa's Future</span>
+        </h1>
+
+        <p>
+          SolPay Africa is building open-source Solana payment
+          infrastructure designed for emerging markets.
+        </p>
+
+        <div class="buttons">
+          <a class="btn primary" href="#about">Discover SolPay</a>
+          <a class="btn secondary"
+             href="https://github.com/Redouane2324"
+             target="_blank">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">What we're building</h2>
+
+      <p class="section-text">
+        SolPay Africa aims to make blockchain payments easier,
+        faster and more accessible for consumers and businesses
+        across emerging markets.
+      </p>
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>⚡ Fast Payments</h3>
+          <p>
+            Leveraging Solana's high-performance blockchain
+            for efficient digital payments.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>🌍 Africa First</h3>
+          <p>
+            Designed with the needs of African consumers,
+            businesses and emerging markets in mind.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>🔓 Open Source</h3>
+          <p>
+            Building transparent infrastructure that can
+            be improved and adopted by the community.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">Why SolPay?</h2>
+
+      <p class="section-text">
+        Our goal is to connect everyday users with modern
+        blockchain payment infrastructure without unnecessary complexity.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>Solana</strong>
+          Blockchain
+        </div>
+
+        <div class="stat">
+          <strong>Open</strong>
+          Infrastructure
+        </div>
+
+        <div class="stat">
+          <strong>Africa</strong>
+          First
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <h2 class="section-title">Our Team</h2>
+
+      <p class="section-text">
+        SolPay Africa is being developed by a
