@@ -1,0 +1,16 @@
+{
+  "name": "solpay-africa-api",
+  "version": "2.0.0",
+  "description": "SolPay Africa Solana payment gateway",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.16.3"
+  }
+}
