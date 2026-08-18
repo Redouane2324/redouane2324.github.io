@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<title>SolPay Africa Dashboard</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0f172a;
+color:#fff;
+}
+
+header{
+padding:20px;
+background:#111827;
+display:flex;
+justify-content:space-between;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:25px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:20px;
+}
+
+.stat{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+}
+
+.number{
+font-size:26px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:18px;
+overflow-x:auto;
+}
+
+button{
+padding:12px 20px;
+border:0;
+border-radius:8px;
+background:#7c3aed;
+color:white;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+min-width:700px;
+}
+
+th,td{
+padding:13px;
+border-bottom:1px solid #334155;
+text-align:left;
+}
+
+.paid{
+color:#4ade80;
+font-weight:bold;
+}
+
+.pending{
+color:#facc15;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<strong>
+SolPay Africa
+</strong>
+
+<span>
+Merchant Dashboard
+</span>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<div>
+Total Requests
+</div>
+
+<div
+id="total"
+class="number"
+>
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div>
+Total SOL Requested
+</div>
+
+<div
+id="totalSol"
+class="number"
+>
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div>
+Paid
+</div>
+
+<div
+id="paid"
+class="number"
+>
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div>
+Pending
+</div>
+
+<div
+id="pending"
+class="number"
+>
+0
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="card">
+
+<button onclick="loadDashboard()">
+Refresh
+</button>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Payment ID</th>
+<th>Amount</th>
+<th>Description</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="rows"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<script>
+
+const API=
+"https://redouane2324-solpay.onrender.com";
+
+
+async function loadDashboard(){
+
+try{
+
+const response=
+await fetch(
+API+"/api/payments"
+);
+
+const payments=
+await response.json();
+
+
+if(!Array.isArray(payments))
+throw new Error("Invalid API response");
+
+
+document.getElementById("total")
+.innerText=payments.length;
+
+
+let totalSol=0;
+let paid=0;
+let pending=0;
+
+
+const rows=
+document.getElementById("rows");
+
+rows.innerHTML="";
+
+
+payments.forEach(payment=>{
+
+totalSol+=Number(payment.amount);
+
+
+if(payment.status==="Paid")
+paid++;
+else
+pending++;
+
+
+const row=
+document.createElement("tr");
+
+
+row.innerHTML=`
+
+<td>
+${payment.paymentId}
+</td>
+
+<td>
+${payment.amount} SOL
+</td>
+
+<td>
+${payment.description || ""}
+</td>
+
+<td class="${
+payment.status==="Paid"
+?"paid"
+:"pending"
+}">
+${payment.status}
+</td>
+
+<td>
+${new Date(
+payment.createdAt
+).toLocaleString()}
+</td>
+
+`;
+
+
+rows.appendChild(row);
+
+});
+
+
+document.getElementById("totalSol")
+.innerText=
+totalSol.toFixed(6);
+
+document.getElementById("paid")
+.innerText=
+paid;
+
+document.getElementById("pending")
+.innerText=
+pending;
+
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>
