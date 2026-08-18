@@ -3,301 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>SolPay Africa | Solana Payments</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#050509;
-  color:#fff;
-  line-height:1.6
+font-family:Arial,Helvetica,sans-serif;
+background:#050509;
+color:#fff;
+line-height:1.6
 }
 
 nav{
-  position:sticky;
-  top:0;
-  z-index:20;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 6%;
-  background:rgba(5,5,9,.96);
-  border-bottom:1px solid #262631;
-  backdrop-filter:blur(10px)
+position:sticky;
+top:0;
+z-index:20;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 6%;
+background:rgba(5,5,9,.96);
+border-bottom:1px solid #262631;
+backdrop-filter:blur(10px)
 }
 
-.logo{
-  font-size:23px;
-  font-weight:800
-}
+.logo{font-size:23px;font-weight:800}
 
 .logo span{
-  background:linear-gradient(90deg,#9945ff,#14f195);
-  -webkit-background-clip:text;
-  color:transparent
+background:linear-gradient(90deg,#9945ff,#14f195);
+-webkit-background-clip:text;
+color:transparent
 }
 
 nav a{
-  color:#aaa;
-  text-decoration:none;
-  margin-left:18px;
-  font-size:14px
+color:#aaa;
+text-decoration:none;
+margin-left:18px;
+font-size:14px
 }
 
 .hero{
-  min-height:78vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:80px 6%;
-  background:
-  radial-gradient(circle at 50% 10%,rgba(153,69,255,.28),transparent 40%),
-  radial-gradient(circle at 80% 80%,rgba(20,241,149,.10),transparent 30%)
+min-height:78vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:80px 6%;
+background:
+radial-gradient(circle at 50% 10%,rgba(153,69,255,.28),transparent 40%),
+radial-gradient(circle at 80% 80%,rgba(20,241,149,.10),transparent 30%)
 }
 
-.hero-content{
-  max-width:900px
-}
+.hero-content{max-width:900px}
 
 .badge{
-  display:inline-block;
-  border:1px solid #9945ff;
-  color:#c9a7ff;
-  border-radius:30px;
-  padding:7px 15px;
-  margin-bottom:20px;
-  font-size:13px
+display:inline-block;
+border:1px solid #9945ff;
+color:#c9a7ff;
+border-radius:30px;
+padding:7px 15px;
+margin-bottom:20px;
+font-size:13px
 }
 
 h1{
-  font-size:clamp(45px,8vw,82px);
-  line-height:1.04;
-  margin-bottom:22px
+font-size:clamp(45px,8vw,82px);
+line-height:1.04;
+margin-bottom:22px
 }
 
 h1 span{
-  background:linear-gradient(90deg,#9945ff,#14f195);
-  -webkit-background-clip:text;
-  color:transparent
+background:linear-gradient(90deg,#9945ff,#14f195);
+-webkit-background-clip:text;
+color:transparent
 }
 
-.hero p,
-.section-text{
-  color:#999;
-  max-width:760px;
-  margin:0 auto 25px
+.hero p,.section-text{
+color:#999;
+max-width:760px;
+margin:0 auto 25px
 }
 
 section{
-  max-width:1200px;
-  margin:auto;
-  padding:75px 6%
+max-width:1200px;
+margin:auto;
+padding:75px 6%
 }
 
-h2{
-  font-size:38px;
-  margin-bottom:12px
-}
+h2{font-size:38px;margin-bottom:12px}
 
 .panel{
-  background:#101016;
-  border:1px solid #292933;
-  border-radius:20px;
-  padding:28px
+background:#101016;
+border:1px solid #292933;
+border-radius:20px;
+padding:28px
 }
 
 .wallet{
-  max-width:700px;
-  margin:auto;
-  text-align:center
+max-width:700px;
+margin:auto;
+text-align:center
 }
 
 .network{
-  display:inline-block;
-  color:#14f195;
-  background:#10251e;
-  border-radius:20px;
-  padding:6px 14px;
-  font-size:13px;
-  margin-bottom:16px
+display:inline-block;
+color:#14f195;
+background:#10251e;
+border-radius:20px;
+padding:6px 14px;
+font-size:13px;
+margin-bottom:16px
 }
 
 .btn{
-  border:0;
-  border-radius:10px;
-  padding:13px 21px;
-  margin:5px;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:15px
+border:0;
+border-radius:10px;
+padding:13px 21px;
+margin:5px;
+font-weight:bold;
+cursor:pointer;
+font-size:15px
 }
 
 .primary{
-  background:linear-gradient(90deg,#9945ff,#14f195);
-  color:#050509
+background:linear-gradient(90deg,#9945ff,#14f195);
+color:#050509
 }
 
 .secondary{
-  background:#111118;
-  border:1px solid #333;
-  color:#fff
+background:#111118;
+border:1px solid #333;
+color:#fff
 }
 
-input,
-select{
-  width:100%;
-  padding:14px;
-  margin:7px 0 15px;
-  border-radius:9px;
-  border:1px solid #333;
-  background:#08080d;
-  color:#fff;
-  font-size:16px
+.btn:disabled{
+opacity:.5;
+cursor:not-allowed
+}
+
+input,select{
+width:100%;
+padding:14px;
+margin:7px 0 15px;
+border-radius:9px;
+border:1px solid #333;
+background:#08080d;
+color:#fff;
+font-size:16px
 }
 
 label{
-  display:block;
-  color:#aaa;
-  margin-top:8px
+display:block;
+color:#aaa;
+margin-top:8px
 }
 
 .form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px
 }
 
-.address,
-.status{
-  color:#999;
-  margin-top:12px;
-  word-break:break-all
+.address,.status{
+color:#999;
+margin-top:12px;
+word-break:break-all
 }
 
 .balance{
-  font-size:25px;
-  font-weight:bold;
-  margin-top:12px
+font-size:25px;
+font-weight:bold;
+margin-top:12px
 }
 
 .result{
-  margin-top:22px;
-  padding:18px;
-  border-radius:12px;
-  background:#08080d;
-  border:1px solid #292933
+margin-top:22px;
+padding:18px;
+border-radius:12px;
+background:#08080d;
+border:1px solid #292933
 }
 
-.success{
-  color:#14f195
-}
-
-.error{
-  color:#ff7777
-}
+.success{color:#14f195}
+.error{color:#ff7777}
 
 .qr{
-  text-align:center;
-  margin-top:25px
+text-align:center;
+margin-top:25px
 }
 
 .qr img{
-  display:none;
-  width:230px;
-  height:230px;
-  background:white;
-  padding:10px;
-  border-radius:12px;
-  margin:15px auto
+display:none;
+width:230px;
+height:230px;
+background:white;
+padding:10px;
+border-radius:12px;
+margin:15px auto
 }
 
 .payment-link{
-  word-break:break-all;
-  color:#999;
-  margin:12px 0
+word-break:break-all;
+color:#999;
+margin:12px 0
 }
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:20px
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:20px
 }
 
 .stat{
-  background:#101016;
-  border:1px solid #292933;
-  border-radius:15px;
-  padding:20px
+background:#101016;
+border:1px solid #292933;
+border-radius:15px;
+padding:20px
 }
 
 .stat strong{
-  display:block;
-  font-size:27px
+display:block;
+font-size:27px
 }
 
 .stat span{
-  color:#888;
-  font-size:13px
+color:#888;
+font-size:13px
 }
 
 table{
-  width:100%;
-  border-collapse:collapse
+width:100%;
+border-collapse:collapse
 }
 
-th,
-td{
-  padding:13px;
-  text-align:left;
-  border-bottom:1px solid #292933
+th,td{
+padding:13px;
+text-align:left;
+border-bottom:1px solid #292933
 }
 
-th{
-  color:#aaa
-}
+th{color:#aaa}
+td{font-size:14px}
 
-td{
-  font-size:14px
-}
+a{color:#14f195}
 
 footer{
-  text-align:center;
-  padding:40px 20px;
-  color:#777;
-  border-top:1px solid #222
+text-align:center;
+padding:40px 20px;
+color:#777;
+border-top:1px solid #222
 }
 
 @media(max-width:800px){
 
-  nav div:last-child{
-    display:none
-  }
+nav div:last-child{display:none}
 
-  section{
-    padding:55px 5%
-  }
+section{padding:55px 5%}
 
-  .form-grid,
-  .stats{
-    grid-template-columns:1fr
-  }
+.form-grid,.stats{grid-template-columns:1fr}
 
-  table{
-    font-size:12px
-  }
+table{font-size:12px}
 }
 </style>
 </head>
-
 
 <body>
 
@@ -308,18 +278,13 @@ Sol<span>Pay</span> Africa
 </div>
 
 <div>
-
 <a href="#payment">Payment</a>
 <a href="#dashboard">Dashboard</a>
 <a href="#verify">Verify</a>
-<a href="https://github.com/Redouane2324" target="_blank">
-GitHub
-</a>
-
+<a href="https://github.com/Redouane2324" target="_blank">GitHub</a>
 </div>
 
 </nav>
-
 
 <section class="hero">
 
@@ -351,9 +316,6 @@ Merchant Dashboard
 
 </section>
 
-
-<!-- WALLET -->
-
 <section>
 
 <h2>Wallet</h2>
@@ -370,8 +332,7 @@ SOLANA DEVNET
 
 <br>
 
-<button id="connectButton"
-class="btn primary">
+<button id="connectButton" class="btn primary">
 Connect Wallet
 </button>
 
@@ -381,26 +342,19 @@ style="display:none">
 Disconnect
 </button>
 
-<div id="walletAddress"
-class="address">
+<div id="walletAddress" class="address">
 Wallet not connected
 </div>
 
-<div id="walletBalance"
-class="balance">
-</div>
+<div id="walletBalance" class="balance"></div>
 
-<div id="walletStatus"
-class="status">
+<div id="walletStatus" class="status">
 Waiting for wallet connection...
 </div>
 
 </div>
 
 </section>
-
-
-<!-- PAYMENT -->
 
 <section id="payment">
 
@@ -412,43 +366,28 @@ Create a payment request for a customer.
 
 <div class="panel">
 
-<label>
-Amount
-</label>
+<label>Amount</label>
 
 <input
 id="amount"
 type="number"
 min="0.000001"
 step="0.000001"
-placeholder="Example: 0.01"
+placeholder="Example: 0.001"
 >
 
-
-<label>
-Currency
-</label>
+<label>Currency</label>
 
 <select id="currency">
-
-<option value="SOL">
-SOL
-</option>
-
-<option value="USDC">
-USDC
-</option>
-
+<option value="SOL">SOL</option>
+<option value="USDC">USDC</option>
 </select>
-
 
 <div class="form-grid">
 
 <div>
 
-<label>
-Description
-</label>
+<label>Description</label>
 
 <input
 id="description"
@@ -457,26 +396,17 @@ placeholder="Example: Product payment"
 
 </div>
 
-
 <div>
 
-<label>
-Payment ID
-</label>
+<label>Payment ID</label>
 
-<input
-id="paymentId"
-readonly
->
+<input id="paymentId" readonly>
 
 </div>
 
 </div>
 
-
-<label>
-Merchant Wallet
-</label>
+<label>Merchant Wallet</label>
 
 <input
 id="merchantWallet"
@@ -484,32 +414,21 @@ value="DusJY2A9f3vM9APtPG7EwRZo1emoSNNKrimSF7JU1pwW"
 readonly
 >
 
-
 <button
 class="btn primary"
 onclick="createPayment()">
 Generate Payment
 </button>
 
-
-<div id="paymentArea"
-style="display:none">
+<div id="paymentArea" style="display:none">
 
 <div class="qr">
 
-<h3>
-Payment QR
-</h3>
+<h3>Payment QR</h3>
 
-<img
-id="qrImage"
-alt="Payment QR"
->
+<img id="qrImage" alt="Payment QR">
 
-<div
-id="paymentLink"
-class="payment-link">
-</div>
+<div id="paymentLink" class="payment-link"></div>
 
 <button
 class="btn secondary"
@@ -519,12 +438,9 @@ Copy Payment Link
 
 </div>
 
-
 <div class="result">
 
-<strong>
-Payment Status:
-</strong>
+<strong>Payment Status:</strong>
 
 <span id="currentPaymentStatus">
 Pending
@@ -547,19 +463,13 @@ Pay with Phantom
 
 </section>
 
-
-<!-- DASHBOARD -->
-
 <section id="dashboard">
 
-<h2>
-Merchant Dashboard
-</h2>
+<h2>Merchant Dashboard</h2>
 
 <p class="section-text">
 Monitor payment requests and transaction status.
 </p>
-
 
 <div class="stats">
 
@@ -585,7 +495,6 @@ Monitor payment requests and transaction status.
 
 </div>
 
-
 <div class="panel">
 
 <table>
@@ -602,8 +511,7 @@ Monitor payment requests and transaction status.
 
 </thead>
 
-<tbody id="paymentTable">
-</tbody>
+<tbody id="paymentTable"></tbody>
 
 </table>
 
@@ -611,19 +519,13 @@ Monitor payment requests and transaction status.
 
 </section>
 
-
-<!-- VERIFY -->
-
 <section id="verify">
 
-<h2>
-Verify Transaction
-</h2>
+<h2>Verify Transaction</h2>
 
 <p class="section-text">
 Enter a Solana transaction signature to check it on Devnet.
 </p>
-
 
 <div class="panel">
 
@@ -638,16 +540,13 @@ onclick="verifyTransaction()">
 Verify on Solana
 </button>
 
-<div
-id="verifyResult"
-class="result">
+<div id="verifyResult" class="result">
 No transaction checked.
 </div>
 
 </div>
 
 </section>
-
 
 <footer>
 
@@ -659,16 +558,11 @@ Solana Devnet MVP • Open Source
 
 </footer>
 
-
-
 <script>
 
-/*
-========================================
-SOLPAY AFRICA
-SOLANA DEVNET CONFIGURATION
-========================================
-*/
+/* ================================
+   SOLPAY CONFIGURATION
+================================ */
 
 const RPC =
 "https://api.devnet.solana.com";
@@ -677,34 +571,21 @@ const MERCHANT =
 "DusJY2A9f3vM9APtPG7EwRZo1emoSNNKrimSF7JU1pwW";
 
 let provider = null;
-
 let currentPayment = null;
 
 
-/*
-========================================
-GET PHANTOM PROVIDER
-========================================
-*/
+/* ================================
+   PHANTOM PROVIDER
+================================ */
 
 function getProvider(){
 
-if(
-window.phantom &&
-window.phantom.solana
-){
-
+if(window.phantom?.solana?.isPhantom){
 return window.phantom.solana;
-
 }
 
-if(
-window.solana &&
-window.solana.isPhantom
-){
-
+if(window.solana?.isPhantom){
 return window.solana;
-
 }
 
 return null;
@@ -712,11 +593,9 @@ return null;
 }
 
 
-/*
-========================================
-MOBILE DETECTION
-========================================
-*/
+/* ================================
+   MOBILE
+================================ */
 
 function isMobile(){
 
@@ -726,11 +605,9 @@ return /Android|iPhone|iPad|iPod/i
 }
 
 
-/*
-========================================
-SHORT ADDRESS
-========================================
-*/
+/* ================================
+   SHORT ADDRESS
+================================ */
 
 function shortAddress(address){
 
@@ -743,37 +620,27 @@ address.substring(address.length-6);
 }
 
 
-/*
-========================================
-CONNECT WALLET
-========================================
-*/
+/* ================================
+   CONNECT
+================================ */
 
 async function connectWallet(){
 
-provider =
-getProvider();
+provider = getProvider();
 
 if(!provider){
 
-document.getElementById(
-"walletStatus"
-).textContent =
-"Open this website inside Phantom on mobile.";
+document.getElementById("walletStatus")
+.textContent =
+"Phantom not detected.";
 
 if(isMobile()){
 
 const url =
-encodeURIComponent(
-window.location.href
-);
+encodeURIComponent(location.href);
 
 window.location.href =
 "https://phantom.app/ul/browse/"
-+
-url
-+
-"?ref="
 +
 url;
 
@@ -783,52 +650,37 @@ return;
 
 }
 
-
 try{
 
-document.getElementById(
-"walletStatus"
-).textContent =
-"Connecting...";
-
+document.getElementById("walletStatus")
+.textContent =
+"Connecting to Phantom...";
 
 const response =
 await provider.connect();
 
-
 const publicKey =
 response.publicKey.toString();
 
-
-document.getElementById(
-"walletAddress"
-).textContent =
+document.getElementById("walletAddress")
+.textContent =
 "Connected: "
 +
 shortAddress(publicKey);
 
-
-document.getElementById(
-"walletStatus"
-).textContent =
+document.getElementById("walletStatus")
+.textContent =
 "Connected to Solana Devnet";
 
-
-document.getElementById(
-"connectButton"
-).style.display =
+document.getElementById("connectButton")
+.style.display =
 "none";
 
-
-document.getElementById(
-"disconnectButton"
-).style.display =
+document.getElementById("disconnectButton")
+.style.display =
 "inline-block";
 
-
-await updateBalance(
-publicKey
-);
+await updateBalance(publicKey);
 
 }
 
@@ -836,83 +688,71 @@ catch(error){
 
 console.error(error);
 
-document.getElementById(
-"walletStatus"
-).textContent =
-"Wallet connection failed.";
+document.getElementById("walletStatus")
+.textContent =
+"Wallet connection failed: "
++
+(error.message || "Unknown error");
 
 }
 
 }
 
 
-/*
-========================================
-DISCONNECT
-========================================
-*/
+/* ================================
+   DISCONNECT
+================================ */
 
 async function disconnectWallet(){
 
 if(provider){
 
 try{
-
 await provider.disconnect();
-
 }catch(e){}
 
 }
 
-document.getElementById(
-"connectButton"
-).style.display =
+document.getElementById("connectButton")
+.style.display =
 "inline-block";
 
-document.getElementById(
-"disconnectButton"
-).style.display =
+document.getElementById("disconnectButton")
+.style.display =
 "none";
 
-document.getElementById(
-"walletAddress"
-).textContent =
+document.getElementById("walletAddress")
+.textContent =
 "Wallet not connected";
 
-document.getElementById(
-"walletBalance"
-).textContent =
+document.getElementById("walletBalance")
+.textContent =
 "";
 
-document.getElementById(
-"walletStatus"
-).textContent =
+document.getElementById("walletStatus")
+.textContent =
 "Waiting for wallet connection...";
+
+provider = null;
 
 }
 
 
-/*
-========================================
-GET BALANCE
-========================================
-*/
+/* ================================
+   BALANCE
+================================ */
 
-async function updateBalance(
-address
-){
+async function updateBalance(address){
 
 try{
 
 const response =
-await fetch(
-RPC,
-{
+await fetch(RPC,{
+
 method:"POST",
 
 headers:{
-"Content-Type":
-"application/json"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
@@ -920,43 +760,37 @@ body:JSON.stringify({
 jsonrpc:"2.0",
 id:1,
 method:"getBalance",
-params:[address]
+params:[
+address,
+{
+commitment:"confirmed"
+}
+]
 
 })
 
-}
-);
-
+});
 
 const data =
 await response.json();
 
-
-if(
-data.result &&
-data.result.value !== undefined
-){
+if(data.result?.value !== undefined){
 
 const sol =
-data.result.value /
-1000000000;
+data.result.value / 1000000000;
 
-
-document.getElementById(
-"walletBalance"
-).textContent =
-sol.toFixed(4)
-+
-" SOL";
+document.getElementById("walletBalance")
+.textContent =
+sol.toFixed(4) + " SOL";
 
 }
 
-}
-catch(error){
+}catch(error){
 
-document.getElementById(
-"walletBalance"
-).textContent =
+console.error(error);
+
+document.getElementById("walletBalance")
+.textContent =
 "Balance unavailable";
 
 }
@@ -964,106 +798,63 @@ document.getElementById(
 }
 
 
-/*
-========================================
-CREATE PAYMENT
-========================================
-*/
+/* ================================
+   CREATE PAYMENT
+================================ */
 
 function createPayment(){
 
 const amount =
 Number(
-document.getElementById(
-"amount"
-).value
+document.getElementById("amount").value
 );
 
 const currency =
-document.getElementById(
-"currency"
-).value;
+document.getElementById("currency").value;
 
 const description =
-document.getElementById(
-"description"
-).value
+document.getElementById("description").value
 ||
 "SolPay Payment";
 
+if(!amount || amount <= 0){
 
-if(
-!amount ||
-amount <= 0
-){
-
-alert(
-"Please enter a valid amount."
-);
+alert("Please enter a valid amount.");
 
 return;
 
 }
-
-
-/*
-USDC is intentionally disabled
-until the correct Devnet mint is configured.
-*/
 
 if(currency === "USDC"){
 
 alert(
-"USDC payments will be enabled after configuring the official Devnet USDC mint."
+"USDC payments are not enabled yet. Please use SOL."
 );
 
 return;
 
 }
 
-
 const id =
-"SP-"
-+
-Date.now();
+"SP-" + Date.now();
 
-
-document.getElementById(
-"paymentId"
-).value =
-id;
-
+document.getElementById("paymentId")
+.value = id;
 
 currentPayment = {
 
-id:id,
-
-amount:amount,
-
+id,
+amount,
 currency:"SOL",
-
-description:description,
-
+description,
 merchant:MERCHANT,
-
 status:"Pending",
-
 signature:"",
-
-created:
-new Date().toISOString()
+created:new Date().toISOString()
 
 };
 
-
-savePayment(
-currentPayment
-);
-
-
-/*
-Solana Pay transfer URL
-*/
+savePayment(currentPayment);
 
 const payUrl =
 "solana:"
@@ -1072,153 +863,107 @@ MERCHANT
 +
 "?amount="
 +
-encodeURIComponent(
-amount
-)
+encodeURIComponent(amount)
 +
 "&label="
 +
-encodeURIComponent(
-"SolPay Africa"
-)
+encodeURIComponent("SolPay Africa")
 +
 "&message="
 +
-encodeURIComponent(
-description
-);
-
+encodeURIComponent(description);
 
 const qrUrl =
 "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
 +
-encodeURIComponent(
-payUrl
-);
+encodeURIComponent(payUrl);
 
+document.getElementById("qrImage")
+.src = qrUrl;
 
-document.getElementById(
-"qrImage"
-).src =
-qrUrl;
+document.getElementById("qrImage")
+.style.display = "block";
 
+document.getElementById("paymentLink")
+.textContent = payUrl;
 
-document.getElementById(
-"qrImage"
-).style.display =
-"block";
+document.getElementById("paymentArea")
+.style.display = "block";
 
+document.getElementById("currentPaymentStatus")
+.textContent = "Pending";
 
-document.getElementById(
-"paymentLink"
-).textContent =
-payUrl;
+document.getElementById("currentPaymentStatus")
+.className = "";
 
+const payButton =
+document.getElementById("payButton");
 
-document.getElementById(
-"paymentArea"
-).style.display =
-"block";
-
-
-document.getElementById(
-"currentPaymentStatus"
-).textContent =
-"Pending";
-
+payButton.disabled = false;
+payButton.textContent = "Pay with Phantom";
 
 renderDashboard();
 
 }
 
 
-/*
-========================================
-SAVE PAYMENT
-========================================
-*/
+/* ================================
+   SAVE PAYMENT
+================================ */
 
 function savePayment(payment){
 
 const payments =
 JSON.parse(
-localStorage.getItem(
-"solpayPayments"
-)
+localStorage.getItem("solpayPayments")
 ||
 "[]"
 );
 
-
-payments.unshift(
-payment
-);
-
+payments.unshift(payment);
 
 localStorage.setItem(
 "solpayPayments",
-JSON.stringify(
-payments
-)
+JSON.stringify(payments)
 );
 
 }
 
 
-/*
-========================================
-UPDATE PAYMENT
-========================================
-*/
+/* ================================
+   UPDATE PAYMENT
+================================ */
 
-function updatePayment(
-id,
-signature,
-status
-){
+function updatePayment(id,signature,status){
 
 const payments =
 JSON.parse(
-localStorage.getItem(
-"solpayPayments"
-)
+localStorage.getItem("solpayPayments")
 ||
 "[]"
 );
 
-
 const payment =
-payments.find(
-p => p.id === id
-);
-
+payments.find(p => p.id === id);
 
 if(payment){
 
-payment.signature =
-signature;
-
-payment.status =
-status;
+payment.signature = signature;
+payment.status = status;
 
 }
 
-
 localStorage.setItem(
 "solpayPayments",
-JSON.stringify(
-payments
-)
+JSON.stringify(payments)
 );
 
 }
 
 
-/*
-========================================
-PAY WITH PHANTOM
-========================================
-*/
+/* ================================
+   PAY WITH PHANTOM
+================================ */
 
 async function payWithPhantom(){
 
@@ -1232,71 +977,55 @@ return;
 
 }
 
-
-provider =
-getProvider();
-
+provider = getProvider();
 
 if(!provider){
 
 alert(
-"Please connect Phantom first."
+"Please install/open Phantom first."
 );
 
 return;
 
 }
 
-
 try{
 
-const sender =
-provider.publicKey
-||
-(
-await provider.connect()
-).publicKey;
+if(!provider.publicKey){
 
+await provider.connect();
+
+}
 
 const senderAddress =
-sender.toString();
+provider.publicKey.toString();
 
+const payButton =
+document.getElementById("payButton");
 
-document.getElementById(
-"payButton"
-).disabled =
-true;
-
-
-document.getElementById(
-"payButton"
-).textContent =
+payButton.disabled = true;
+payButton.textContent =
 "Preparing transaction...";
 
 
 /*
-Get recent blockhash
+Get latest blockhash
 */
 
 const blockhashResponse =
-await fetch(
-RPC,
-{
+await fetch(RPC,{
+
 method:"POST",
 
 headers:{
-"Content-Type":
-"application/json"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
 
 jsonrpc:"2.0",
-
 id:1,
-
 method:"getLatestBlockhash",
-
 params:[
 {
 commitment:"confirmed"
@@ -1305,37 +1034,35 @@ commitment:"confirmed"
 
 })
 
-}
-);
-
+});
 
 const blockhashData =
 await blockhashResponse.json();
 
+if(blockhashData.error){
+
+throw new Error(
+blockhashData.error.message
+);
+
+}
 
 const blockhash =
 blockhashData.result.value.blockhash;
 
 
 /*
-We use Phantom's provider request API
-with a serialized transaction.
-
-For a production version this section
-will be replaced by @solana/web3.js or
-@solana/kit transaction construction.
+Convert SOL to lamports
 */
 
 const lamports =
 Math.round(
-currentPayment.amount *
-1000000000
+currentPayment.amount * 1000000000
 );
 
 
 /*
-Create a transaction message manually.
-This is a Devnet SOL transfer.
+Create transaction
 */
 
 const transaction =
@@ -1346,33 +1073,29 @@ lamports,
 blockhash
 );
 
+payButton.textContent =
+"Approve in Phantom...";
 
-document.getElementById(
-"payButton"
-).textContent =
-"Waiting for Phantom...";
 
+/*
+Send through Phantom
+*/
 
 const result =
 await provider.signAndSendTransaction(
 transaction
 );
 
-
 const signature =
-result.signature
-||
-result.hash;
-
+result?.signature;
 
 if(!signature){
 
 throw new Error(
-"No transaction signature returned."
+"Phantom did not return a transaction signature."
 );
 
 }
-
 
 currentPayment.signature =
 signature;
@@ -1380,24 +1103,34 @@ signature;
 currentPayment.status =
 "Confirming";
 
-
 updatePayment(
 currentPayment.id,
 signature,
 "Confirming"
 );
 
-
 document.getElementById(
 "currentPaymentStatus"
 ).textContent =
-"Confirming";
+"Confirming...";
 
 
-await waitForConfirmation(
-signature
-);
+/*
+Wait for blockchain confirmation
+*/
 
+payButton.textContent =
+"Confirming transaction...";
+
+await waitForConfirmation(signature);
+
+
+/*
+Payment successful
+*/
+
+currentPayment.status =
+"Paid";
 
 updatePayment(
 currentPayment.id,
@@ -1405,54 +1138,52 @@ signature,
 "Paid"
 );
 
-
-currentPayment.status =
-"Paid";
-
-
 document.getElementById(
 "currentPaymentStatus"
 ).textContent =
 "Paid";
-
 
 document.getElementById(
 "currentPaymentStatus"
 ).className =
 "success";
 
-
-document.getElementById(
-"payButton"
-).textContent =
+payButton.textContent =
 "Payment Completed";
-
 
 renderDashboard();
 
+await updateBalance(senderAddress);
 
 alert(
-"Payment confirmed on Solana Devnet."
+"Payment confirmed successfully on Solana Devnet."
 );
 
-}
-catch(error){
+}catch(error){
 
-console.error(error);
+console.error("PAYMENT ERROR:",error);
 
-document.getElementById(
-"payButton"
-).disabled =
-false;
+const payButton =
+document.getElementById("payButton");
 
-document.getElementById(
-"payButton"
-).textContent =
+payButton.disabled = false;
+payButton.textContent =
 "Pay with Phantom";
 
+document.getElementById(
+"currentPaymentStatus"
+).textContent =
+"Payment Failed";
+
+document.getElementById(
+"currentPaymentStatus"
+).className =
+"error";
 
 alert(
-"Transaction failed or was cancelled."
+"Transaction failed:\n\n"
++
+(error.message || error)
 );
 
 }
@@ -1460,17 +1191,9 @@ alert(
 }
 
 
-/*
-========================================
-TRANSACTION BUILDER
-========================================
-
-This creates a legacy Solana transaction.
-
-We load web3.js from the official jsDelivr
-package CDN so the browser can construct
-and serialize the transaction.
-*/
+/* ================================
+   CREATE SOLANA TRANSACTION
+================================ */
 
 async function createTransferTransaction(
 from,
@@ -1479,66 +1202,46 @@ lamports,
 blockhash
 ){
 
-if(
-!window.solanaWeb3
-){
-
 await loadWeb3();
 
-}
-
-
 const {
-Connection,
 PublicKey,
 Transaction,
 SystemProgram
 } =
 window.solanaWeb3;
 
-
 const transaction =
-new Transaction();
+new Transaction({
 
+recentBlockhash:blockhash,
 
-transaction.recentBlockhash =
-blockhash;
+feePayer:new PublicKey(from)
 
-
-transaction.feePayer =
-new PublicKey(
-from
-);
-
+});
 
 transaction.add(
 
 SystemProgram.transfer({
 
-fromPubkey:
-new PublicKey(from),
+fromPubkey:new PublicKey(from),
 
-toPubkey:
-new PublicKey(to),
+toPubkey:new PublicKey(to),
 
-lamports:
-lamports
+lamports:lamports
 
 })
 
 );
-
 
 return transaction;
 
 }
 
 
-/*
-========================================
-LOAD SOLANA WEB3.JS
-========================================
-*/
+/* ================================
+   LOAD WEB3
+================================ */
 
 function loadWeb3(){
 
@@ -1548,33 +1251,24 @@ return new Promise(
 if(window.solanaWeb3){
 
 resolve();
-
 return;
 
 }
 
-
 const script =
-document.createElement(
-"script"
-);
-
+document.createElement("script");
 
 script.src =
 "https://cdn.jsdelivr.net/npm/@solana/web3.js@1.98.4/lib/index.iife.min.js";
 
+script.onload = resolve;
 
-script.onload =
-resolve;
-
-
-script.onerror =
-reject;
-
-
-document.head.appendChild(
-script
+script.onerror = () =>
+reject(
+new Error("Could not load Solana web3.js")
 );
+
+document.head.appendChild(script);
 
 }
 );
@@ -1582,42 +1276,28 @@ script
 }
 
 
-/*
-========================================
-CONFIRM TRANSACTION
-========================================
-*/
+/* ================================
+   CONFIRM TRANSACTION
+================================ */
 
-async function waitForConfirmation(
-signature
-){
+async function waitForConfirmation(signature){
 
-for(
-let i=0;
-i<20;
-i++
-){
+for(let i=0;i<30;i++){
 
 const response =
-await fetch(
-RPC,
-{
+await fetch(RPC,{
+
 method:"POST",
 
 headers:{
-"Content-Type":
-"application/json"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
 
 jsonrpc:"2.0",
-
 id:1,
-
-method:
-"getSignatureStatuses",
-
+method:"getSignatureStatuses",
 params:[
 [signature],
 {
@@ -1627,37 +1307,28 @@ searchTransactionHistory:true
 
 })
 
-}
-);
-
+});
 
 const data =
 await response.json();
 
-
 const status =
-data.result &&
-data.result.value &&
-data.result.value[0];
-
+data.result?.value?.[0];
 
 if(status){
 
 if(status.err){
 
 throw new Error(
-"Transaction failed on Solana."
+"Solana reported that the transaction failed."
 );
 
 }
 
-
 if(
-status.confirmationStatus ===
-"confirmed"
+status.confirmationStatus === "confirmed"
 ||
-status.confirmationStatus ===
-"finalized"
+status.confirmationStatus === "finalized"
 ){
 
 return true;
@@ -1666,116 +1337,90 @@ return true;
 
 }
 
-
 await new Promise(
 resolve =>
-setTimeout(
-resolve,
-2000
-)
+setTimeout(resolve,2000)
 );
 
 }
-
 
 throw new Error(
-"Transaction confirmation timeout."
+"Transaction confirmation timed out."
 );
 
 }
 
 
-/*
-========================================
-COPY PAYMENT LINK
-========================================
-*/
+/* ================================
+   COPY PAYMENT LINK
+================================ */
 
 async function copyPaymentLink(){
 
 const text =
-document.getElementById(
-"paymentLink"
-).textContent;
-
+document.getElementById("paymentLink")
+.textContent;
 
 try{
 
-await navigator.clipboard.writeText(
-text
-);
+await navigator.clipboard.writeText(text);
 
-alert(
-"Payment link copied."
-);
+alert("Payment link copied.");
 
-}
-catch(e){
+}catch(error){
 
-alert(
-"Copy failed."
-);
+alert("Copy failed.");
 
 }
 
 }
 
 
-/*
-========================================
-VERIFY TRANSACTION
-========================================
-*/
+/* ================================
+   VERIFY TRANSACTION
+================================ */
 
 async function verifyTransaction(){
 
 const signature =
-document.getElementById(
-"signatureInput"
-).value.trim();
-
+document.getElementById("signatureInput")
+.value.trim();
 
 const result =
-document.getElementById(
-"verifyResult"
-);
-
+document.getElementById("verifyResult");
 
 if(!signature){
 
 result.textContent =
 "Enter a transaction signature.";
 
+result.className = "result error";
+
 return;
 
 }
 
-
 result.textContent =
 "Checking Solana Devnet...";
 
+result.className = "result";
 
 try{
 
 const response =
-await fetch(
-RPC,
-{
+await fetch(RPC,{
+
 method:"POST",
 
 headers:{
-"Content-Type":
-"application/json"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
 
 jsonrpc:"2.0",
-
 id:1,
-
 method:"getSignatureStatuses",
-
 params:[
 [signature],
 {
@@ -1785,29 +1430,25 @@ searchTransactionHistory:true
 
 })
 
-}
-);
-
+});
 
 const data =
 await response.json();
 
-
 const status =
-data.result &&
-data.result.value &&
-data.result.value[0];
-
+data.result?.value?.[0];
 
 if(!status){
 
 result.textContent =
 "Transaction not found on Devnet.";
 
+result.className =
+"result error";
+
 return;
 
 }
-
 
 if(status.err){
 
@@ -1821,72 +1462,71 @@ return;
 
 }
 
-
 result.innerHTML =
-"Transaction confirmed on Solana Devnet.<br><br>"
+"Transaction confirmed on Solana Devnet."
++
+"<br><br>"
 +
 "Status: "
 +
-(status.confirmationStatus || "confirmed");
-
+(status.confirmationStatus || "confirmed")
++
+"<br><br>"
++
+"<a href='https://explorer.solana.com/tx/"
++
+encodeURIComponent(signature)
++
+"?cluster=devnet' target='_blank'>"
++
+"View on Solana Explorer"
++
+"</a>";
 
 result.className =
 "result success";
 
-
-}
-catch(error){
+}catch(error){
 
 console.error(error);
 
 result.textContent =
 "Verification failed.";
 
-}
+result.className =
+"result error";
 
 }
 
+}
 
-/*
-========================================
-DASHBOARD
-========================================
-*/
+
+/* ================================
+   DASHBOARD
+================================ */
 
 function renderDashboard(){
 
 const payments =
 JSON.parse(
-localStorage.getItem(
-"solpayPayments"
-)
+localStorage.getItem("solpayPayments")
 ||
 "[]"
 );
 
-
-document.getElementById(
-"totalRequests"
-).textContent =
+document.getElementById("totalRequests")
+.textContent =
 payments.length;
 
+let total = 0;
+let pending = 0;
+let paid = 0;
 
-let total=0;
+payments.forEach(payment=>{
 
-let pending=0;
+if(payment.currency === "SOL"){
 
-let paid=0;
-
-
-payments.forEach(
-payment=>{
-
-if(
-payment.currency === "SOL"
-){
-
-total +=
-Number(payment.amount);
+total += Number(payment.amount);
 
 }
 
@@ -1900,71 +1540,60 @@ pending++;
 
 }
 
-if(
-payment.status === "Paid"
-){
+if(payment.status === "Paid"){
 
 paid++;
 
 }
 
-}
-);
+});
 
-
-document.getElementById(
-"totalAmount"
-).textContent =
+document.getElementById("totalAmount")
+.textContent =
 total.toFixed(4);
 
-
-document.getElementById(
-"pendingCount"
-).textContent =
+document.getElementById("pendingCount")
+.textContent =
 pending;
 
-
-document.getElementById(
-"paidCount"
-).textContent =
+document.getElementById("paidCount")
+.textContent =
 paid;
 
-
 const table =
-document.getElementById(
-"paymentTable"
-);
+document.getElementById("paymentTable");
 
+table.innerHTML = "";
 
-table.innerHTML="";
-
-
-payments.forEach(
-payment=>{
+payments.forEach(payment=>{
 
 const row =
-document.createElement(
-"tr"
-);
-
+document.createElement("tr");
 
 const tx =
 payment.signature
+
 ?
+
 "<a href='https://explorer.solana.com/tx/"
 +
-payment.signature
+encodeURIComponent(payment.signature)
 +
-"?cluster=devnet' target='_blank'>View</a>"
-:
-"-";
+"?cluster=devnet' target='_blank'>"
++
+"View"
++
+"</a>"
 
+:
+
+"-";
 
 row.innerHTML =
 
 "<td>"
 +
-payment.amount
+escapeHtml(payment.amount)
 +
 "</td>"
 
@@ -1972,7 +1601,7 @@ payment.amount
 
 "<td>"
 +
-payment.currency
+escapeHtml(payment.currency)
 +
 "</td>"
 
@@ -1980,9 +1609,7 @@ payment.currency
 
 "<td>"
 +
-escapeHtml(
-payment.description
-)
+escapeHtml(payment.description)
 +
 "</td>"
 
@@ -1990,7 +1617,7 @@ payment.description
 
 "<td>"
 +
-payment.status
+escapeHtml(payment.status)
 +
 "</td>"
 
@@ -2002,84 +1629,48 @@ tx
 +
 "</td>";
 
+table.appendChild(row);
 
-table.appendChild(
-row
-);
-
-}
-);
+});
 
 }
 
 
-/*
-========================================
-ESCAPE HTML
-========================================
-*/
+/* ================================
+   ESCAPE HTML
+================================ */
 
-function escapeHtml(
-text
-){
+function escapeHtml(text){
 
 return String(text)
 
-.replaceAll(
-"&",
-"&amp;"
-)
-
-.replaceAll(
-"<",
-"&lt;"
-)
-
-.replaceAll(
-">",
-"&gt;"
-)
-
-.replaceAll(
-'"',
-"&quot;"
-)
-
-.replaceAll(
-"'",
-"&#039;"
-);
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
-/*
-========================================
-INITIALIZE
-========================================
-*/
+/* ================================
+   INIT
+================================ */
 
-document.getElementById(
-"merchantWallet"
-).value =
-MERCHANT;
+document.getElementById("merchantWallet")
+.value = MERCHANT;
 
-
-document.getElementById(
-"connectButton"
-).addEventListener(
+document.getElementById("connectButton")
+.addEventListener(
 "click",
 connectWallet
 );
 
-
-document.getElementById(
-"disconnectButton"
-).addEventListener(
+document.getElementById("disconnectButton")
+.addEventListener(
 "click",
 disconnectWallet
 );
-
 
 renderDashboard();
 
