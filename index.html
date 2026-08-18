@@ -1,173 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>SolPay Africa</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
+
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        #0f172a;
+
       color: white;
     }
 
     .container {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 25px;
+
+      max-width: 520px;
+
+      margin:
+        40px auto;
+
+      padding:
+        20px;
     }
 
     .card {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+
+      background:
+        #1e293b;
+
+      padding:
+        30px;
+
+      border-radius:
+        20px;
+
+      box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.3);
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 10px;
+
+      text-align:
+        center;
+
+      margin-bottom:
+        5px;
     }
 
     .subtitle {
-      text-align: center;
-      color: #94a3b8;
-      margin-bottom: 30px;
+
+      text-align:
+        center;
+
+      color:
+        #94a3b8;
+
+      margin-bottom:
+        30px;
     }
 
     label {
-      display: block;
-      margin-top: 18px;
-      margin-bottom: 7px;
+
+      display:
+        block;
+
+      margin-top:
+        18px;
+
+      margin-bottom:
+        7px;
     }
 
     input {
-      width: 100%;
-      padding: 13px;
-      border-radius: 10px;
-      border: 1px solid #475569;
-      background: #0f172a;
-      color: white;
-      font-size: 16px;
+
+      width:
+        100%;
+
+      padding:
+        14px;
+
+      border-radius:
+        10px;
+
+      border:
+        1px solid #475569;
+
+      background:
+        #0f172a;
+
+      color:
+        white;
+
+      font-size:
+        16px;
     }
 
     button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 14px;
-      border: 0;
-      border-radius: 10px;
-      background: #7c3aed;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+
+      width:
+        100%;
+
+      margin-top:
+        18px;
+
+      padding:
+        14px;
+
+      border:
+        none;
+
+      border-radius:
+        10px;
+
+      background:
+        #7c3aed;
+
+      color:
+        white;
+
+      font-size:
+        16px;
+
+      font-weight:
+        bold;
+
+      cursor:
+        pointer;
     }
 
     button:hover {
-      background: #6d28d9;
+
+      background:
+        #6d28d9;
+    }
+
+    button:disabled {
+
+      opacity:
+        .5;
+
+      cursor:
+        not-allowed;
+    }
+
+    .wallet {
+
+      margin-top:
+        15px;
+
+      padding:
+        12px;
+
+      background:
+        #0f172a;
+
+      border-radius:
+        10px;
+
+      word-break:
+        break-all;
+
+      font-size:
+        13px;
+
+      color:
+        #c4b5fd;
     }
 
     #result {
-      margin-top: 25px;
-      padding: 15px;
-      background: #0f172a;
-      border-radius: 10px;
-      display: none;
-      word-break: break-word;
+
+      margin-top:
+        25px;
+
+      padding:
+        18px;
+
+      background:
+        #0f172a;
+
+      border-radius:
+        12px;
+
+      display:
+        none;
+
+      word-break:
+        break-word;
     }
 
     .success {
-      color: #4ade80;
+      color:
+        #4ade80;
     }
 
     .error {
-      color: #f87171;
+      color:
+        #f87171;
     }
 
-    .payment-id {
-      margin-top: 10px;
-      color: #c4b5fd;
+    .pending {
+      color:
+        #facc15;
     }
+
+    .small {
+
+      font-size:
+        13px;
+
+      color:
+        #94a3b8;
+
+      margin-top:
+        10px;
+    }
+
+    a {
+
+      color:
+        #a78bfa;
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="card">
+  <div class="card">
 
-      <h1>SolPay Africa</h1>
+    <h1>
+      SolPay Africa
+    </h1>
 
-      <div class="subtitle">
-        Solana Payment Gateway
-      </div>
-
-      <label for="amount">
-        Amount (SOL)
-      </label>
-
-      <input
-        id="amount"
-        type="number"
-        step="0.000001"
-        min="0.000001"
-        placeholder="0.01"
-      >
-
-      <label for="description">
-        Description
-      </label>
-
-      <input
-        id="description"
-        type="text"
-        placeholder="Payment description"
-      >
-
-      <button onclick="createPayment()">
-        Create Payment
-      </button>
-
-      <div id="result"></div>
-
+    <div class="subtitle">
+      Solana Devnet Payment Gateway
     </div>
 
+
+    <!-- WALLET -->
+
+    <button
+      id="connectButton"
+      onclick="connectWallet()"
+    >
+      Connect Phantom
+    </button>
+
+    <div
+      id="wallet"
+      class="wallet"
+      style="display:none"
+    ></div>
+
+
+    <!-- PAYMENT -->
+
+    <label for="amount">
+      Amount (SOL)
+    </label>
+
+    <input
+      id="amount"
+      type="number"
+      step="0.000001"
+      min="0.000001"
+      placeholder="0.001"
+    >
+
+
+    <label for="description">
+      Description
+    </label>
+
+    <input
+      id="description"
+      type="text"
+      placeholder="SolPay Test Payment"
+    >
+
+
+    <button
+      id="createButton"
+      onclick="createPayment()"
+    >
+      Create Payment
+    </button>
+
+
+    <button
+      id="payButton"
+      onclick="payPayment()"
+      disabled
+    >
+      Pay with Phantom
+    </button>
+
+
+    <div id="result"></div>
+
   </div>
+
+</div>
+
 
 <script>
 
 const API_URL =
   "https://redouane2324-solpay.onrender.com";
 
+let provider = null;
 
-async function createPayment() {
+let walletPublicKey = null;
 
-  const amount =
-    document.getElementById("amount").value;
+let currentPayment = null;
 
-  const description =
-    document.getElementById("description").value;
 
-  const result =
-    document.getElementById("result");
+/*
+========================================
+PHANTOM
+========================================
+*/
 
-  result.style.display = "block";
+function getProvider() {
 
-  result.innerHTML =
-    "Creating payment...";
+  if (
+    window.phantom &&
+    window.phantom.solana
+  ) {
 
-  if (!amount || Number(amount) <= 0) {
+    return window.phantom.solana;
 
-    result.innerHTML =
-      '<span class="error">Please enter a valid SOL amount.</span>';
+  }
+
+  if (
+    window.solana &&
+    window.solana.isPhantom
+  ) {
+
+    return window.solana;
+
+  }
+
+  return null;
+}
+
+
+/*
+========================================
+CONNECT WALLET
+========================================
+*/
+
+async function connectWallet() {
+
+  provider =
+    getProvider();
+
+  if (!provider) {
+
+    alert(
+      "Phantom Wallet is not installed. Open this page inside Phantom browser or install Phantom."
+    );
 
     return;
   }
@@ -175,29 +393,113 @@ async function createPayment() {
   try {
 
     const response =
+      await provider.connect();
+
+    walletPublicKey =
+      response.publicKey.toString();
+
+    document.getElementById(
+      "connectButton"
+    ).innerText =
+      "Wallet Connected";
+
+    const wallet =
+      document.getElementById("wallet");
+
+    wallet.style.display =
+      "block";
+
+    wallet.innerText =
+      "Wallet: " +
+      walletPublicKey;
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Wallet connection cancelled."
+    );
+  }
+}
+
+
+/*
+========================================
+CREATE PAYMENT
+========================================
+*/
+
+async function createPayment() {
+
+  const amount =
+    document.getElementById(
+      "amount"
+    ).value;
+
+  const description =
+    document.getElementById(
+      "description"
+    ).value;
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+  result.style.display =
+    "block";
+
+  result.innerHTML =
+    '<span class="pending">Creating payment...</span>';
+
+
+  if (
+    !amount ||
+    Number(amount) <= 0
+  ) {
+
+    result.innerHTML =
+      '<span class="error">Enter a valid SOL amount.</span>';
+
+    return;
+  }
+
+
+  try {
+
+    const response =
       await fetch(
-        API_URL + "/api/payments",
+        API_URL +
+        "/api/payments",
         {
-          method: "POST",
+
+          method:
+            "POST",
 
           headers: {
             "Content-Type":
               "application/json"
           },
 
-          body: JSON.stringify({
-            amount:
-              Number(amount),
+          body:
+            JSON.stringify({
 
-            description:
-              description ||
-              "SolPay Payment"
-          })
+              amount:
+                Number(amount),
+
+              description:
+                description ||
+                "SolPay Payment"
+
+            })
         }
       );
 
+
     const data =
       await response.json();
+
 
     if (!response.ok) {
 
@@ -205,8 +507,12 @@ async function createPayment() {
         data.error ||
         "Unable to create payment"
       );
-
     }
+
+
+    currentPayment =
+      data;
+
 
     result.innerHTML = `
 
@@ -214,27 +520,35 @@ async function createPayment() {
         Payment created successfully!
       </div>
 
-      <div class="payment-id">
-        Payment ID:
-        <strong>${data.paymentId}</strong>
-      </div>
+      <p>
+        <strong>Payment ID:</strong>
+        ${data.paymentId}
+      </p>
 
       <p>
-        Amount:
+        <strong>Amount:</strong>
         ${data.amount} SOL
       </p>
 
       <p>
-        Status:
-        ${data.status}
+        <strong>Status:</strong>
+        <span class="pending">
+          ${data.status}
+        </span>
       </p>
 
       <p>
-        Merchant:
+        <strong>Merchant:</strong>
         ${data.merchant}
       </p>
 
     `;
+
+
+    document.getElementById(
+      "payButton"
+    ).disabled = false;
+
 
   } catch (error) {
 
@@ -245,6 +559,380 @@ async function createPayment() {
         ${error.message}
       </span>
     `;
+  }
+}
+
+
+/*
+========================================
+PAY
+========================================
+*/
+
+async function payPayment() {
+
+  if (!currentPayment) {
+
+    alert(
+      "Create a payment first."
+    );
+
+    return;
+  }
+
+
+  provider =
+    getProvider();
+
+
+  if (!provider) {
+
+    alert(
+      "Phantom Wallet not found."
+    );
+
+    return;
+  }
+
+
+  if (!walletPublicKey) {
+
+    await connectWallet();
+
+    if (!walletPublicKey) {
+      return;
+    }
+  }
+
+
+  const payButton =
+    document.getElementById(
+      "payButton"
+    );
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+
+  payButton.disabled =
+    true;
+
+  payButton.innerText =
+    "Waiting for Phantom...";
+
+
+  try {
+
+    /*
+    ====================================
+    SOLANA WEB3
+    ====================================
+    */
+
+    const {
+      Connection,
+      PublicKey,
+      SystemProgram,
+      Transaction,
+      LAMPORTS_PER_SOL
+    } = solanaWeb3;
+
+
+    const connection =
+      new Connection(
+        "https://api.devnet.solana.com",
+        "confirmed"
+      );
+
+
+    const from =
+      new PublicKey(
+        walletPublicKey
+      );
+
+
+    const to =
+      new PublicKey(
+        currentPayment.merchant
+      );
+
+
+    const lamports =
+      Math.round(
+        Number(
+          currentPayment.amount
+        ) *
+        LAMPORTS_PER_SOL
+      );
+
+
+    /*
+    ====================================
+    CREATE TRANSFER
+    ====================================
+    */
+
+    const transaction =
+      new Transaction();
+
+
+    transaction.add(
+
+      SystemProgram.transfer({
+
+        fromPubkey:
+          from,
+
+        toPubkey:
+          to,
+
+        lamports:
+          lamports
+
+      })
+
+    );
+
+
+    const latestBlockhash =
+      await connection.getLatestBlockhash(
+        "confirmed"
+      );
+
+
+    transaction.recentBlockhash =
+      latestBlockhash.blockhash;
+
+    transaction.feePayer =
+      from;
+
+
+    /*
+    ====================================
+    SEND TO PHANTOM
+    ====================================
+    */
+
+    payButton.innerText =
+      "Approve in Phantom...";
+
+
+    const signed =
+      await provider.signAndSendTransaction(
+        transaction
+      );
+
+
+    const signature =
+      signed.signature;
+
+
+    result.innerHTML = `
+
+      <div class="pending">
+        Transaction sent.
+      </div>
+
+      <p>
+        Waiting for blockchain confirmation...
+      </p>
+
+      <p>
+        Signature:
+        <br>
+        ${signature}
+      </p>
+
+    `;
+
+
+    /*
+    ====================================
+    WAIT CONFIRMATION
+    ====================================
+    */
+
+    await connection.confirmTransaction(
+      {
+        signature:
+          signature,
+
+        blockhash:
+          latestBlockhash.blockhash,
+
+        lastValidBlockHeight:
+          latestBlockhash.lastValidBlockHeight
+      },
+      "confirmed"
+    );
+
+
+    /*
+    ====================================
+    VERIFY BACKEND
+    ====================================
+    */
+
+    result.innerHTML = `
+
+      <div class="pending">
+        Transaction confirmed.
+      </div>
+
+      <p>
+        SolPay is verifying the payment...
+      </p>
+
+    `;
+
+
+    const verifyResponse =
+      await fetch(
+
+        API_URL +
+        "/api/payments/" +
+        currentPayment.paymentId +
+        "/verify",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              signature:
+                signature
+
+            })
+
+        }
+
+      );
+
+
+    const verification =
+      await verifyResponse.json();
+
+
+    /*
+    ====================================
+    RESULT
+    ====================================
+    */
+
+    if (
+      verification.paid
+    ) {
+
+      result.innerHTML = `
+
+        <div class="success">
+
+          <h2>
+            Payment Successful ✅
+          </h2>
+
+        </div>
+
+        <p>
+          <strong>Payment ID:</strong>
+          ${verification.paymentId}
+        </p>
+
+        <p>
+          <strong>Amount:</strong>
+          ${verification.amount} SOL
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          Paid
+        </p>
+
+        <p>
+          <strong>Network:</strong>
+          Solana Devnet
+        </p>
+
+        <p>
+          <strong>Transaction:</strong>
+          <br>
+
+          <a
+            href="https://explorer.solana.com/tx/${signature}?cluster=devnet"
+            target="_blank"
+          >
+            View on Solana Explorer
+          </a>
+
+        </p>
+
+      `;
+
+      payButton.innerText =
+        "Payment Completed";
+
+    } else {
+
+      result.innerHTML = `
+
+        <div class="error">
+          Payment verification failed.
+        </div>
+
+        <p>
+          ${verification.error || "Unknown error"}
+        </p>
+
+        <p>
+          Status:
+          ${verification.status || "Unknown"}
+        </p>
+
+      `;
+
+      payButton.disabled =
+        false;
+
+      payButton.innerText =
+        "Try Payment Again";
+    }
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    result.innerHTML = `
+
+      <div class="error">
+
+        Payment failed.
+
+      </div>
+
+      <p>
+        ${error.message}
+      </p>
+
+    `;
+
+    payButton.disabled =
+      false;
+
+    payButton.innerText =
+      "Pay with Phantom";
 
   }
 
@@ -252,5 +940,14 @@ async function createPayment() {
 
 </script>
 
+
+<!-- Solana Web3.js -->
+
+<script
+  src="https://unpkg.com/@solana/web3.js@1.98.4/lib/index.iife.min.js">
+</script>
+
+
 </body>
+
 </html>
