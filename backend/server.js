@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const bs58 = require("bs58");
+
 const {
   Connection,
   PublicKey
@@ -21,8 +23,14 @@ const RPC_URL =
 const MERCHANT =
   "DusJY2A9f3vM9APtPG7EwRZo1emoSNNKrimSF7JU1pwW";
 
+const MEMO_PROGRAM =
+  "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr";
+
 const connection =
-  new Connection(RPC_URL, "confirmed");
+  new Connection(
+    RPC_URL,
+    "confirmed"
+  );
 
 const payments = new Map();
 
@@ -33,12 +41,14 @@ HEALTH
 */
 
 app.get("/", (req, res) => {
+
   res.json({
     service: "SolPay Africa API",
     network: "Solana Devnet",
     status: "online",
     merchant: MERCHANT
   });
+
 });
 
 
@@ -48,61 +58,91 @@ CREATE PAYMENT
 ========================================
 */
 
-app.post("/api/payments", (req, res) => {
+app.post(
+  "/api/payments",
+  (req, res) => {
 
-  try {
+    try {
 
-    const {
-      amount,
-      description
-    } = req.body;
+      const {
+        amount,
+        description
+      } = req.body;
 
-    const numericAmount = Number(amount);
+      const numericAmount =
+        Number(amount);
 
-    if (
-      !Number.isFinite(numericAmount) ||
-      numericAmount <= 0
-    ) {
-      return res.status(400).json({
-        error: "Invalid amount"
+      if (
+        !Number.isFinite(
+          numericAmount
+        ) ||
+        numericAmount <= 0
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Invalid amount"
+        });
+
+      }
+
+      const paymentId =
+        "SP-" +
+        Date.now() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .substring(2, 8)
+          .toUpperCase();
+
+      const payment = {
+
+        paymentId,
+
+        amount:
+          numericAmount,
+
+        currency:
+          "SOL",
+
+        merchant:
+          MERCHANT,
+
+        description:
+          description ||
+          "SolPay Payment",
+
+        status:
+          "Pending",
+
+        signature:
+          null,
+
+        createdAt:
+          new Date().toISOString()
+
+      };
+
+      payments.set(
+        paymentId,
+        payment
+      );
+
+      res.json(payment);
+
+    } catch (error) {
+
+      console.error(error);
+
+      res.status(500).json({
+        error:
+          "Unable to create payment"
       });
+
     }
 
-    const paymentId =
-      "SP-" +
-      Date.now() +
-      "-" +
-      Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase();
-
-    const payment = {
-      paymentId,
-      amount: numericAmount,
-      currency: "SOL",
-      merchant: MERCHANT,
-      description:
-        description || "SolPay Payment",
-      status: "Pending",
-      signature: null,
-      createdAt:
-        new Date().toISOString()
-    };
-
-    payments.set(paymentId, payment);
-
-    res.json(payment);
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      error: "Unable to create payment"
-    });
   }
-});
+);
 
 
 /*
@@ -116,15 +156,42 @@ app.get(
   (req, res) => {
 
     const payment =
-      payments.get(req.params.paymentId);
+      payments.get(
+        req.params.paymentId
+      );
 
     if (!payment) {
+
       return res.status(404).json({
-        error: "Payment not found"
+        error:
+          "Payment not found"
       });
+
     }
 
     res.json(payment);
+
+  }
+);
+
+
+/*
+========================================
+LIST PAYMENTS
+========================================
+*/
+
+app.get(
+  "/api/payments",
+  (req, res) => {
+
+    const list =
+      Array.from(
+        payments.values()
+      ).reverse();
+
+    res.json(list);
+
   }
 );
 
@@ -142,80 +209,102 @@ app.post(
     try {
 
       const payment =
-        payments.get(req.params.paymentId);
+        payments.get(
+          req.params.paymentId
+        );
 
       if (!payment) {
+
         return res.status(404).json({
-          error: "Payment not found"
+          paid: false,
+          error:
+            "Payment not found"
         });
+
       }
 
-      const { signature } = req.body;
+      const {
+        signature
+      } = req.body;
 
       if (!signature) {
+
         return res.status(400).json({
           paid: false,
           error:
             "Transaction signature is required"
         });
+
       }
-
-      /*
-      Prevent paying the same payment twice
-      */
-
-      if (payment.status === "Paid") {
-        return res.json({
-          paid: true,
-          status: "Paid",
-          paymentId: payment.paymentId,
-          signature: payment.signature,
-          amount: payment.verifiedAmount,
-          merchant: MERCHANT
-        });
-      }
-
-      /*
-      Validate signature
-      */
 
       if (
-        typeof signature !== "string" ||
-        signature.length < 80 ||
-        signature.length > 120
+        payment.status === "Paid"
       ) {
-        return res.status(400).json({
-          paid: false,
-          error:
-            "Invalid transaction signature"
+
+        return res.json({
+
+          paid:
+            true,
+
+          status:
+            "Paid",
+
+          paymentId:
+            payment.paymentId,
+
+          signature:
+            payment.signature,
+
+          amount:
+            payment.verifiedAmount,
+
+          merchant:
+            MERCHANT
+
         });
+
       }
 
       /*
-      Get transaction from Solana Devnet
+      ==================================
+      GET TRANSACTION
+      ==================================
       */
 
       const transaction =
         await connection.getParsedTransaction(
           signature,
           {
-            commitment: "confirmed",
-            maxSupportedTransactionVersion: 0
+            commitment:
+              "confirmed",
+
+            maxSupportedTransactionVersion:
+              0
           }
         );
 
       if (!transaction) {
 
         return res.status(404).json({
-          paid: false,
-          status: "NotFound",
+
+          paid:
+            false,
+
+          status:
+            "NotFound",
+
           error:
             "Transaction not found on Solana Devnet"
+
         });
+
       }
 
+
       /*
-      Transaction failed?
+      ==================================
+      TRANSACTION ERROR
+      ==================================
       */
 
       if (
@@ -224,105 +313,228 @@ app.post(
       ) {
 
         return res.json({
-          paid: false,
-          status: "Failed",
+
+          paid:
+            false,
+
+          status:
+            "Failed",
+
           error:
-            "Transaction failed on Solana"
+            "Transaction failed"
+
         });
+
       }
 
+
       /*
-      Search SOL transfer
+      ==================================
+      FIND TRANSFER
+      ==================================
       */
 
-      let verifiedAmount = 0;
-      let verifiedMerchant = false;
+      let verifiedAmount =
+        0;
+
+      let verifiedMerchant =
+        false;
+
+      let verifiedMemo =
+        false;
 
       const instructions =
-        transaction.transaction.message.instructions;
+        transaction.transaction
+          .message
+          .instructions;
+
 
       for (
-        const instruction of instructions
+        const instruction
+        of instructions
       ) {
+
+        /*
+        SOL TRANSFER
+        */
 
         if (
           instruction.parsed &&
-          instruction.program === "system" &&
-          instruction.parsed.type === "transfer"
+          instruction.program ===
+            "system" &&
+          instruction.parsed.type ===
+            "transfer"
         ) {
 
           const info =
             instruction.parsed.info;
 
-          const destination =
-            info.destination;
-
-          const lamports =
-            Number(info.lamports);
-
           if (
-            destination === MERCHANT
+            info.destination ===
+            MERCHANT
           ) {
 
-            verifiedMerchant = true;
+            verifiedMerchant =
+              true;
 
             verifiedAmount =
-              lamports / 1000000000;
+              Number(
+                info.lamports
+              ) / 1000000000;
 
-            break;
           }
+
         }
+
+
+        /*
+        MEMO
+        */
+
+        if (
+          instruction.programId &&
+          instruction.programId.toString() ===
+            MEMO_PROGRAM
+        ) {
+
+          try {
+
+            const decoded =
+              bs58.decode(
+                instruction.data
+              );
+
+            const memo =
+              Buffer
+                .from(decoded)
+                .toString("utf8");
+
+            if (
+              memo ===
+              payment.paymentId
+            ) {
+
+              verifiedMemo =
+                true;
+
+            }
+
+          } catch (memoError) {
+
+            console.log(
+              "Memo decode error",
+              memoError
+            );
+
+          }
+
+        }
+
       }
 
+
       /*
-      Merchant verification
+      ==================================
+      MERCHANT
+      ==================================
       */
 
       if (!verifiedMerchant) {
 
         return res.json({
-          paid: false,
-          status: "InvalidMerchant",
+
+          paid:
+            false,
+
+          status:
+            "InvalidMerchant",
+
           error:
-            "Payment was not sent to the SolPay merchant wallet"
+            "Funds were not sent to the SolPay merchant wallet"
+
         });
+
       }
 
+
       /*
-      Amount verification
+      ==================================
+      AMOUNT
+      ==================================
       */
 
       const expected =
-        Number(payment.amount);
+        Number(
+          payment.amount
+        );
 
       const tolerance =
         0.000000001;
 
+
       if (
         Math.abs(
-          verifiedAmount - expected
+          verifiedAmount -
+          expected
         ) > tolerance
       ) {
 
         return res.json({
-          paid: false,
-          status: "InvalidAmount",
+
+          paid:
+            false,
+
+          status:
+            "InvalidAmount",
+
           expected,
-          received: verifiedAmount,
+
+          received:
+            verifiedAmount,
+
           error:
-            "Transaction amount does not match Payment ID"
+            "Payment amount does not match"
+
         });
+
       }
 
+
       /*
-      SUCCESS
+      ==================================
+      MEMO / PAYMENT ID
+      ==================================
       */
 
-      payment.signature =
-        signature;
+      if (!verifiedMemo) {
+
+        return res.json({
+
+          paid:
+            false,
+
+          status:
+            "InvalidPaymentId",
+
+          error:
+            "Payment ID memo not found in transaction"
+
+        });
+
+      }
+
+
+      /*
+      ==================================
+      SUCCESS
+      ==================================
+      */
 
       payment.status =
         "Paid";
+
+      payment.signature =
+        signature;
 
       payment.verifiedAmount =
         verifiedAmount;
@@ -335,16 +547,17 @@ app.post(
         payment
       );
 
-      return res.json({
 
-        paid: true,
+      res.json({
 
-        status: "Paid",
+        paid:
+          true,
+
+        status:
+          "Paid",
 
         paymentId:
           payment.paymentId,
-
-        signature,
 
         amount:
           verifiedAmount,
@@ -352,8 +565,11 @@ app.post(
         merchant:
           MERCHANT,
 
+        signature,
+
         network:
           "Solana Devnet"
+
       });
 
     } catch (error) {
@@ -363,19 +579,25 @@ app.post(
         error
       );
 
-      return res.status(500).json({
-        paid: false,
+      res.status(500).json({
+
+        paid:
+          false,
+
         error:
           "Verification failed"
+
       });
+
     }
+
   }
 );
 
 
 /*
 ========================================
-START SERVER
+START
 ========================================
 */
 
