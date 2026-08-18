@@ -1,0 +1,15 @@
+{
+  "name": "solpay-africa-backend",
+  "version": "1.0.0",
+  "description": "SolPay Africa payment verification backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0"
+  }
+}
