@@ -1,1372 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SolPay Africa</title>
 
 <script src="https://unpkg.com/@solana/web3.js@1.98.4/lib/index.iife.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-
-* {
-  box-sizing:border-box;
-}
-
-body {
-
-  margin:0;
-
-  font-family:
-    Arial,
-    sans-serif;
-
-  background:
-    #0f172a;
-
-  color:white;
-
-}
-
-header {
-
-  padding:20px;
-
-  background:#111827;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-}
-
-.logo {
-
-  font-size:22px;
-
-  font-weight:bold;
-
-}
-
-.network {
-
-  color:#a78bfa;
-
-  font-size:13px;
-
-}
-
-.container {
-
-  max-width:1100px;
-
-  margin:auto;
-
-  padding:25px;
-
-}
-
-.grid {
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(300px,1fr)
-    );
-
-  gap:20px;
-
-}
-
-.card {
-
-  background:#1e293b;
-
-  padding:25px;
-
-  border-radius:18px;
-
-  margin-bottom:20px;
-
-}
-
-h1,h2 {
-
-  margin-top:0;
-
-}
-
-input {
-
-  width:100%;
-
-  padding:13px;
-
-  margin:
-    7px 0 15px;
-
-  background:#0f172a;
-
-  color:white;
-
-  border:
-    1px solid #475569;
-
-  border-radius:9px;
-
-}
-
-button {
-
-  width:100%;
-
-  padding:13px;
-
-  border:0;
-
-  border-radius:9px;
-
-  background:#7c3aed;
-
-  color:white;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-  margin-top:8px;
-
-}
-
-button:hover {
-
-  background:#6d28d9;
-
-}
-
-button:disabled {
-
-  opacity:.5;
-
-}
-
-.wallet {
-
-  margin-top:12px;
-
-  padding:10px;
-
-  background:#0f172a;
-
-  border-radius:8px;
-
-  font-size:12px;
-
-  word-break:break-all;
-
-}
-
-.result {
-
-  margin-top:15px;
-
-  padding:15px;
-
-  background:#0f172a;
-
-  border-radius:10px;
-
-  word-break:break-word;
-
-}
-
-.success {
-
-  color:#4ade80;
-
-}
-
-.pending {
-
-  color:#facc15;
-
-}
-
-.error {
-
-  color:#f87171;
-
-}
-
-table {
-
-  width:100%;
-
-  border-collapse:collapse;
-
-}
-
-th,td {
-
-  padding:10px;
-
-  border-bottom:
-    1px solid #334155;
-
-  text-align:left;
-
-  font-size:13px;
-
-}
-
-.qr {
-
-  background:white;
-
-  padding:15px;
-
-  display:inline-block;
-
-  border-radius:10px;
-
-  margin-top:15px;
-
-}
-
-a {
-
-  color:#a78bfa;
-
-}
-
-.small {
-
-  color:#94a3b8;
-
-  font-size:13px;
-
-}
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff}
+header{padding:20px;background:#111827;display:flex;justify-content:space-between}
+.container{max-width:850px;margin:auto;padding:25px}
+.card{background:#1e293b;padding:25px;border-radius:18px;margin-bottom:20px}
+input{width:100%;padding:14px;margin:8px 0 15px;background:#0f172a;color:#fff;border:1px solid #475569;border-radius:9px}
+button{width:100%;padding:14px;border:0;border-radius:9px;background:#7c3aed;color:#fff;font-weight:bold;cursor:pointer;margin-top:8px}
+button:disabled{opacity:.5}
+.result{margin-top:18px;padding:15px;background:#0f172a;border-radius:10px;word-break:break-word}
+.success{color:#4ade80}
+.pending{color:#facc15}
+.error{color:#f87171}
+.wallet{margin-top:12px;padding:12px;background:#0f172a;border-radius:8px;font-size:12px;word-break:break-all}
+.qr{background:#fff;padding:15px;display:inline-block;border-radius:10px}
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
-<div class="logo">
-SolPay Africa
-</div>
-
-<div class="network">
-Solana Devnet • Payment MVP
-</div>
-
+<strong>SolPay Africa</strong>
+<span>Solana Devnet</span>
 </header>
-
 
 <div class="container">
 
-
-<div class="grid">
-
-
-<!-- CREATE PAYMENT -->
-
 <div class="card">
+<h2>Create Payment</h2>
 
-<h2>
-Create Payment
-</h2>
+<label>Amount (SOL)</label>
+<input id="amount" type="number" min="0.000001" step="0.000001" placeholder="0.001">
 
-<label>
-Amount (SOL)
-</label>
+<label>Description</label>
+<input id="description" placeholder="Product or service">
 
-<input
-  id="amount"
-  type="number"
-  step="0.000001"
-  min="0.000001"
-  placeholder="0.001"
->
+<button onclick="createPayment()">Create Payment</button>
 
-<label>
-Description
-</label>
-
-<input
-  id="description"
-  placeholder="Product or service"
->
-
-<button
-  onclick="createPayment()"
->
-Create Payment
-</button>
-
-<div
-  id="createResult"
-  class="result"
-  style="display:none"
-></div>
-
+<div id="createResult" class="result" style="display:none"></div>
 </div>
 
 
-<!-- WALLET -->
+<div id="paymentCard" class="card" style="display:none">
 
-<div class="card">
-
-<h2>
-Customer Payment
-</h2>
-
-<button
-  id="connectButton"
-  onclick="connectWallet()"
->
-Connect Phantom
-</button>
-
-<div
-  id="wallet"
-  class="wallet"
-  style="display:none"
-></div>
-
-<div
-  id="paymentBox"
-  style="display:none"
->
-
-<hr>
-
-<h3>
-Payment
-</h3>
+<h2>Pay</h2>
 
 <div id="paymentInfo"></div>
 
-<button
-  id="payButton"
-  onclick="payPayment()"
->
+<button id="connectButton" onclick="connectWallet()">
+Connect Phantom
+</button>
+
+<div id="wallet" class="wallet" style="display:none"></div>
+
+<button id="payButton" onclick="payPayment()" disabled>
 Pay with Phantom
 </button>
 
-<div
-  id="paymentResult"
-  class="result"
-  style="display:none"
-></div>
-
-</div>
-
-</div>
+<div id="paymentResult" class="result" style="display:none"></div>
 
 </div>
 
 
-<!-- QR -->
+<div id="qrCard" class="card" style="display:none">
 
-<div
-  id="qrCard"
-  class="card"
-  style="display:none"
->
+<h2>Payment QR</h2>
 
-<h2>
-Payment QR
-</h2>
-
-<div
-  id="qrcode"
-  class="qr"
-></div>
-
-<p class="small">
-Scan this QR code to open the SolPay payment page.
-</p>
+<div id="qrcode" class="qr"></div>
 
 </div>
-
-
-<!-- DASHBOARD -->
-
-<div class="card">
-
-<h2>
-Merchant Dashboard
-</h2>
-
-<button
-  onclick="loadPayments()"
->
-Refresh Payments
-</button>
-
-<br><br>
-
-<div
-  style="overflow-x:auto"
->
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-Payment ID
-</th>
-
-<th>
-Amount
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Created
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-  id="paymentsTable"
->
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
 
 </div>
 
 
 <script>
 
+const API =
+"https://redouane2324-solpay.onrender.com";
 
-const API_URL =
-  "https://redouane2324-solpay.onrender.com";
-
-
-let provider =
-  null;
-
-let walletPublicKey =
-  null;
-
-let currentPayment =
-  null;
+let provider=null;
+let wallet=null;
+let payment=null;
 
 
-/*
-========================================
-PHANTOM
-========================================
-*/
+function getProvider(){
 
-function getProvider() {
+if(window.phantom && window.phantom.solana)
+return window.phantom.solana;
 
-  if (
-    window.phantom &&
-    window.phantom.solana
-  ) {
+if(window.solana && window.solana.isPhantom)
+return window.solana;
 
-    return window.phantom.solana;
-
-  }
-
-  if (
-    window.solana &&
-    window.solana.isPhantom
-  ) {
-
-    return window.solana;
-
-  }
-
-  return null;
+return null;
 
 }
 
 
-/*
-========================================
-CONNECT
-========================================
-*/
+async function connectWallet(){
 
-async function connectWallet() {
+provider=getProvider();
 
-  provider =
-    getProvider();
+if(!provider){
 
-  if (!provider) {
+alert("Open this page inside Phantom browser.");
+return;
 
-    alert(
-      "Open this page in Phantom browser or install Phantom."
-    );
+}
 
-    return;
+try{
 
-  }
+const response=await provider.connect();
 
-  try {
+wallet=response.publicKey.toString();
 
-    const response =
-      await provider.connect();
+document.getElementById("connectButton").innerText=
+"Wallet Connected";
 
-    walletPublicKey =
-      response.publicKey.toString();
+const box=document.getElementById("wallet");
 
-    document.getElementById(
-      "connectButton"
-    ).innerText =
-      "Wallet Connected";
+box.style.display="block";
+box.innerText=wallet;
 
-    const wallet =
-      document.getElementById(
-        "wallet"
-      );
+document.getElementById("payButton").disabled=false;
 
-    wallet.style.display =
-      "block";
+}catch(error){
 
-    wallet.innerText =
-      walletPublicKey;
+console.error(error);
 
-  } catch(error) {
-
-    console.error(error);
-
-  }
+}
 
 }
 
 
-/*
-========================================
-CREATE
-========================================
-*/
+async function createPayment(){
 
-async function createPayment() {
+const amount=Number(
+document.getElementById("amount").value
+);
 
-  const amount =
-    Number(
-      document.getElementById(
-        "amount"
-      ).value
-    );
+const description=
+document.getElementById("description").value ||
+"SolPay Payment";
 
-  const description =
-    document.getElementById(
-      "description"
-    ).value ||
-    "SolPay Payment";
+const result=
+document.getElementById("createResult");
 
-  const result =
-    document.getElementById(
-      "createResult"
-    );
-
-  result.style.display =
-    "block";
-
-  result.innerHTML =
-    "Creating payment...";
+result.style.display="block";
 
 
-  if (
-    !Number.isFinite(amount) ||
-    amount <= 0
-  ) {
+if(!Number.isFinite(amount) || amount<=0){
 
-    result.innerHTML =
-      '<span class="error">Invalid amount.</span>';
+result.innerHTML=
+'<span class="error">Invalid amount.</span>';
 
-    return;
-
-  }
-
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        "/api/payments",
-        {
-
-          method:
-            "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-
-              amount,
-
-              description
-
-            })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error
-      );
-
-    }
-
-
-    currentPayment =
-      data;
-
-
-    showPayment(
-      data
-    );
-
-
-    result.innerHTML = `
-
-      <div class="success">
-        Payment created successfully.
-      </div>
-
-      <p>
-        Payment ID:
-        <strong>
-          ${data.paymentId}
-        </strong>
-      </p>
-
-      <p>
-        ${data.amount} SOL
-      </p>
-
-    `;
-
-
-    createQR(
-      data
-    );
-
-
-    loadPayments();
-
-
-  } catch(error) {
-
-    result.innerHTML =
-      `<span class="error">${error.message}</span>`;
-
-  }
+return;
 
 }
 
 
-/*
-========================================
-SHOW PAYMENT
-========================================
-*/
+try{
 
-function showPayment(
-  payment
-) {
+const response=await fetch(
+API+"/api/payments",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+amount,
+description
+})
+}
+);
 
-  document.getElementById(
-    "paymentBox"
-  ).style.display =
-    "block";
+const data=await response.json();
 
+if(!response.ok)
+throw new Error(data.error || "Unable to create payment");
 
-  document.getElementById(
-    "paymentInfo"
-  ).innerHTML = `
+payment=data;
 
-    <p>
-      <strong>Payment ID:</strong>
-      ${payment.paymentId}
-    </p>
+document.getElementById("paymentCard").style.display="block";
 
-    <p>
-      <strong>Amount:</strong>
-      ${payment.amount} SOL
-    </p>
+document.getElementById("paymentInfo").innerHTML=`
 
-    <p>
-      <strong>Description:</strong>
-      ${payment.description}
-    </p>
+<p><strong>Payment ID:</strong><br>
+${data.paymentId}</p>
 
-    <p>
-      <strong>Status:</strong>
-      <span class="pending">
-        ${payment.status}
-      </span>
-    </p>
+<p><strong>Amount:</strong>
+${data.amount} SOL</p>
 
-  `;
+<p><strong>Status:</strong>
+<span class="pending">${data.status}</span></p>
+
+<p><strong>Merchant:</strong><br>
+${data.merchant}</p>
+`;
+
+result.innerHTML=`
+<span class="success">
+Payment created successfully.
+</span>
+<br><br>
+Payment ID: ${data.paymentId}
+`;
+
+createQR(data);
+
+}catch(error){
+
+result.innerHTML=
+`<span class="error">${error.message}</span>`;
+
+}
 
 }
 
 
-/*
-========================================
-QR
-========================================
-*/
+function createQR(data){
 
-function createQR(
-  payment
-) {
+document.getElementById("qrCard").style.display="block";
 
-  const card =
-    document.getElementById(
-      "qrCard"
-    );
+const qr=document.getElementById("qrcode");
 
-  card.style.display =
-    "block";
+qr.innerHTML="";
 
+const url=
+window.location.origin+
+window.location.pathname+
+"?payment="+
+encodeURIComponent(data.paymentId);
 
-  const qr =
-    document.getElementById(
-      "qrcode"
-    );
-
-  qr.innerHTML =
-    "";
-
-
-  const url =
-    window.location.origin +
-    window.location.pathname +
-    "?payment=" +
-    encodeURIComponent(
-      payment.paymentId
-    );
-
-
-  new QRCode(
-    qr,
-    {
-      text:url,
-      width:220,
-      height:220
-    }
-  );
+new QRCode(qr,{
+text:url,
+width:220,
+height:220
+});
 
 }
 
 
-/*
-========================================
-PAY
-========================================
-*/
+async function payPayment(){
 
-async function payPayment() {
+if(!payment)return;
 
-  if (!currentPayment) {
+provider=getProvider();
 
-    return;
+if(!provider){
 
-  }
+alert("Phantom not found.");
+return;
 
+}
 
-  provider =
-    getProvider();
+if(!wallet){
 
+await connectWallet();
 
-  if (!provider) {
-
-    alert(
-      "Phantom not found."
-    );
-
-    return;
-
-  }
-
-
-  if (!walletPublicKey) {
-
-    await connectWallet();
-
-    if (!walletPublicKey) {
-      return;
-    }
-
-  }
-
-
-  const button =
-    document.getElementById(
-      "payButton"
-    );
-
-  const result =
-    document.getElementById(
-      "paymentResult"
-    );
-
-
-  button.disabled =
-    true;
-
-  button.innerText =
-    "Preparing transaction...";
-
-  result.style.display =
-    "block";
-
-
-  try {
-
-    const {
-      Connection,
-      PublicKey,
-      SystemProgram,
-      Transaction,
-      TransactionInstruction,
-      LAMPORTS_PER_SOL
-    } = solanaWeb3;
-
-
-    const connection =
-      new Connection(
-        "https://api.devnet.solana.com",
-        "confirmed"
-      );
-
-
-    const from =
-      new PublicKey(
-        walletPublicKey
-      );
-
-
-    const to =
-      new PublicKey(
-        currentPayment.merchant
-      );
-
-
-    const lamports =
-      Math.round(
-        currentPayment.amount *
-        LAMPORTS_PER_SOL
-      );
-
-
-    const transaction =
-      new Transaction();
-
-
-    /*
-    ================================
-    SOL TRANSFER
-    ================================
-    */
-
-    transaction.add(
-
-      SystemProgram.transfer({
-
-        fromPubkey:
-          from,
-
-        toPubkey:
-          to,
-
-        lamports
-
-      })
-
-    );
-
-
-    /*
-    ================================
-    PAYMENT MEMO
-    ================================
-    */
-
-    const memoProgram =
-      new PublicKey(
-        "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
-      );
-
-
-    const memoInstruction =
-      new TransactionInstruction({
-
-        keys: [],
-
-        programId:
-          memoProgram,
-
-        data:
-          new TextEncoder()
-            .encode(
-              currentPayment.paymentId
-            )
-
-      });
-
-
-    transaction.add(
-      memoInstruction
-    );
-
-
-    /*
-    ================================
-    BLOCKHASH
-    ================================
-    */
-
-    const latest =
-      await connection.getLatestBlockhash(
-        "confirmed"
-      );
-
-
-    transaction.recentBlockhash =
-      latest.blockhash;
-
-    transaction.feePayer =
-      from;
-
-
-    /*
-    ================================
-    PHANTOM
-    ================================
-    */
-
-    button.innerText =
-      "Approve in Phantom...";
-
-
-    const sent =
-      await provider.signAndSendTransaction(
-        transaction
-      );
-
-
-    const signature =
-      sent.signature;
-
-
-    result.innerHTML = `
-
-      <div class="pending">
-        Transaction sent.
-      </div>
-
-      <p>
-        Waiting for confirmation...
-      </p>
-
-      <p>
-        ${signature}
-      </p>
-
-    `;
-
-
-    /*
-    ================================
-    CONFIRM
-    ================================
-    */
-
-    await connection.confirmTransaction(
-
-      {
-
-        signature,
-
-        blockhash:
-          latest.blockhash,
-
-        lastValidBlockHeight:
-          latest.lastValidBlockHeight
-
-      },
-
-      "confirmed"
-
-    );
-
-
-    /*
-    ================================
-    BACKEND VERIFY
-    ================================
-    */
-
-    result.innerHTML = `
-
-      <div class="pending">
-        Transaction confirmed.
-      </div>
-
-      <p>
-        SolPay is verifying...
-      </p>
-
-    `;
-
-
-    const response =
-      await fetch(
-
-        API_URL +
-        "/api/payments/" +
-        currentPayment.paymentId +
-        "/verify",
-
-        {
-
-          method:
-            "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              signature
-            })
-
-        }
-
-      );
-
-
-    const verification =
-      await response.json();
-
-
-    if (
-      verification.paid
-    ) {
-
-      result.innerHTML = `
-
-        <div class="success">
-
-          <h2>
-            Payment Successful ✅
-          </h2>
-
-        </div>
-
-        <p>
-          Payment ID:
-          ${verification.paymentId}
-        </p>
-
-        <p>
-          Amount:
-          ${verification.amount} SOL
-        </p>
-
-        <p>
-          Status:
-          <strong>Paid</strong>
-        </p>
-
-        <p>
-
-          <a
-            target="_blank"
-            href="https://explorer.solana.com/tx/${signature}?cluster=devnet"
-          >
-            View Transaction
-          </a>
-
-        </p>
-
-      `;
-
-
-      button.innerText =
-        "Payment Completed";
-
-
-      currentPayment.status =
-        "Paid";
-
-
-      loadPayments();
-
-
-    } else {
-
-      result.innerHTML = `
-
-        <div class="error">
-          Verification failed.
-        </div>
-
-        <p>
-          ${verification.error || ""}
-        </p>
-
-      `;
-
-      button.disabled =
-        false;
-
-      button.innerText =
-        "Pay with Phantom";
-
-    }
-
-
-  } catch(error) {
-
-    console.error(error);
-
-    result.innerHTML = `
-
-      <div class="error">
-        Payment failed.
-      </div>
-
-      <p>
-        ${error.message}
-      </p>
-
-    `;
-
-
-    button.disabled =
-      false;
-
-    button.innerText =
-      "Pay with Phantom";
-
-  }
+if(!wallet)return;
 
 }
 
 
-/*
-========================================
-DASHBOARD
-========================================
-*/
+const button=document.getElementById("payButton");
+const result=document.getElementById("paymentResult");
 
-async function loadPayments() {
+button.disabled=true;
+button.innerText="Preparing...";
 
-  const table =
-    document.getElementById(
-      "paymentsTable"
-    );
+result.style.display="block";
 
 
-  try {
+try{
 
-    const response =
-      await fetch(
-        API_URL +
-        "/api/payments"
-      );
-
-
-    const payments =
-      await response.json();
+const {
+Connection,
+PublicKey,
+SystemProgram,
+Transaction,
+LAMPORTS_PER_SOL
+}=solanaWeb3;
 
 
-    table.innerHTML =
-      "";
+const connection=new Connection(
+"https://api.devnet.solana.com",
+"confirmed"
+);
 
 
-    payments.forEach(
-      payment => {
+const from=new PublicKey(wallet);
 
-        const row =
-          document.createElement(
-            "tr"
-          );
+const to=new PublicKey(payment.merchant);
 
-
-        row.innerHTML = `
-
-          <td>
-            ${payment.paymentId}
-          </td>
-
-          <td>
-            ${payment.amount} SOL
-          </td>
-
-          <td>
-            <span class="${
-              payment.status === "Paid"
-                ? "success"
-                : "pending"
-            }">
-              ${payment.status}
-            </span>
-          </td>
-
-          <td>
-            ${new Date(
-              payment.createdAt
-            ).toLocaleString()}
-          </td>
-
-        `;
+const lamports=Math.round(
+payment.amount*LAMPORTS_PER_SOL
+);
 
 
-        table.appendChild(
-          row
-        );
+const transaction=new Transaction();
 
-      }
-    );
+transaction.add(
+SystemProgram.transfer({
+fromPubkey:from,
+toPubkey:to,
+lamports
+})
+);
 
 
-  } catch(error) {
+const latest=
+await connection.getLatestBlockhash("confirmed");
 
-    console.error(error);
+transaction.recentBlockhash=
+latest.blockhash;
 
-  }
+transaction.feePayer=from;
+
+
+button.innerText="Approve in Phantom";
+
+
+const sent=
+await provider.signAndSendTransaction(
+transaction
+);
+
+
+const signature=sent.signature;
+
+
+result.innerHTML=`
+<span class="pending">
+Transaction sent. Verifying...
+</span>
+`;
+
+
+await connection.confirmTransaction(
+{
+signature,
+blockhash:latest.blockhash,
+lastValidBlockHeight:
+latest.lastValidBlockHeight
+},
+"confirmed"
+);
+
+
+const verify=
+await fetch(
+API+
+"/api/payments/"+
+encodeURIComponent(payment.paymentId)+
+"/verify",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+signature
+})
+}
+);
+
+
+const data=await verify.json();
+
+
+if(data.paid){
+
+result.innerHTML=`
+
+<h2 class="success">
+Payment Successful ✅
+</h2>
+
+<p>
+Amount: ${data.amount} SOL
+</p>
+
+<p>
+Status: <strong>Paid</strong>
+</p>
+
+<p>
+Payment ID: ${data.paymentId}
+</p>
+
+<a
+target="_blank"
+href="https://explorer.solana.com/tx/${signature}?cluster=devnet"
+style="color:#a78bfa"
+>
+View transaction on Solana Explorer
+</a>
+`;
+
+button.innerText="Paid";
+
+payment.status="Paid";
+
+}else{
+
+result.innerHTML=`
+<span class="error">
+${data.error || "Verification failed"}
+</span>
+`;
+
+button.disabled=false;
+button.innerText="Pay with Phantom";
+
+}
+
+}catch(error){
+
+console.error(error);
+
+result.innerHTML=`
+<span class="error">
+${error.message}
+</span>
+`;
+
+button.disabled=false;
+button.innerText="Pay with Phantom";
+
+}
 
 }
 
 
-/*
-========================================
-OPEN PAYMENT FROM QR
-========================================
-*/
+async function loadPayment(){
 
-async function loadPaymentFromURL() {
+const params=
+new URLSearchParams(window.location.search);
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+const paymentId=params.get("payment");
+
+if(!paymentId)return;
 
 
-  const paymentId =
-    params.get(
-      "payment"
-    );
+try{
 
+const response=
+await fetch(
+API+
+"/api/payments/"+
+encodeURIComponent(paymentId)
+);
 
-  if (!paymentId) {
+if(!response.ok)return;
 
-    loadPayments();
+const data=await response.json();
 
-    return;
+payment=data;
 
-  }
+document.getElementById("paymentCard").style.display="block";
 
+document.getElementById("paymentInfo").innerHTML=`
 
-  try {
+<p><strong>Payment ID:</strong><br>
+${data.paymentId}</p>
 
-    const response =
-      await fetch(
+<p><strong>Amount:</strong>
+${data.amount} SOL</p>
 
-        API_URL +
-        "/api/payments/" +
-        encodeURIComponent(
-          paymentId
-        )
+<p><strong>Status:</strong>
+${data.status}</p>
 
-      );
+<p><strong>Merchant:</strong><br>
+${data.merchant}</p>
+`;
 
+}catch(error){
 
-    if (!response.ok) {
-
-      throw new Error(
-        "Payment not found"
-      );
-
-    }
-
-
-    const payment =
-      await response.json();
-
-
-    currentPayment =
-      payment;
-
-
-    showPayment(
-      payment
-    );
-
-
-  } catch(error) {
-
-    console.error(error);
-
-  }
+console.error(error);
 
 }
 
+}
 
-loadPaymentFromURL();
+loadPayment();
 
 </script>
 
-
 </body>
-
 </html>
