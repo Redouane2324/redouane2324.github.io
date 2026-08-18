@@ -28,7 +28,7 @@ const payments = new Map();
 
 /*
 ========================================
-HEALTH CHECK
+HEALTH
 ========================================
 */
 
@@ -36,7 +36,8 @@ app.get("/", (req, res) => {
   res.json({
     service: "SolPay Africa API",
     network: "Solana Devnet",
-    status: "online"
+    status: "online",
+    merchant: MERCHANT
   });
 });
 
@@ -56,8 +57,7 @@ app.post("/api/payments", (req, res) => {
       description
     } = req.body;
 
-    const numericAmount =
-      Number(amount);
+    const numericAmount = Number(amount);
 
     if (
       !Number.isFinite(numericAmount) ||
@@ -78,32 +78,19 @@ app.post("/api/payments", (req, res) => {
         .toUpperCase();
 
     const payment = {
-
       paymentId,
-
       amount: numericAmount,
-
       currency: "SOL",
-
       merchant: MERCHANT,
-
       description:
-        description ||
-        "SolPay Payment",
-
+        description || "SolPay Payment",
       status: "Pending",
-
       signature: null,
-
       createdAt:
         new Date().toISOString()
-
     };
 
-    payments.set(
-      paymentId,
-      payment
-    );
+    payments.set(paymentId, payment);
 
     res.json(payment);
 
@@ -114,9 +101,7 @@ app.post("/api/payments", (req, res) => {
     res.status(500).json({
       error: "Unable to create payment"
     });
-
   }
-
 });
 
 
@@ -131,20 +116,15 @@ app.get(
   (req, res) => {
 
     const payment =
-      payments.get(
-        req.params.paymentId
-      );
+      payments.get(req.params.paymentId);
 
     if (!payment) {
-
       return res.status(404).json({
         error: "Payment not found"
       });
-
     }
 
     res.json(payment);
-
   }
 );
 
@@ -162,50 +142,57 @@ app.post(
     try {
 
       const payment =
-        payments.get(
-          req.params.paymentId
-        );
+        payments.get(req.params.paymentId);
 
       if (!payment) {
-
         return res.status(404).json({
           error: "Payment not found"
         });
-
       }
 
-      const {
-        signature
-      } = req.body;
+      const { signature } = req.body;
 
       if (!signature) {
-
         return res.status(400).json({
+          paid: false,
           error:
             "Transaction signature is required"
         });
-
       }
 
       /*
-      Validate signature format
+      Prevent paying the same payment twice
+      */
+
+      if (payment.status === "Paid") {
+        return res.json({
+          paid: true,
+          status: "Paid",
+          paymentId: payment.paymentId,
+          signature: payment.signature,
+          amount: payment.verifiedAmount,
+          merchant: MERCHANT
+        });
+      }
+
+      /*
+      Validate signature
       */
 
       if (
         typeof signature !== "string" ||
         signature.length < 80 ||
-        signature.length > 100
+        signature.length > 120
       ) {
-
         return res.status(400).json({
+          paid: false,
           error:
             "Invalid transaction signature"
         });
-
       }
 
       /*
-      Get transaction from Solana
+      Get transaction from Solana Devnet
       */
 
       const transaction =
@@ -220,20 +207,15 @@ app.post(
       if (!transaction) {
 
         return res.status(404).json({
-
           paid: false,
-
           status: "NotFound",
-
           error:
             "Transaction not found on Solana Devnet"
-
         });
-
       }
 
       /*
-      Check transaction error
+      Transaction failed?
       */
 
       if (
@@ -242,38 +224,25 @@ app.post(
       ) {
 
         return res.json({
-
           paid: false,
-
           status: "Failed",
-
           error:
             "Transaction failed on Solana"
-
         });
-
       }
 
       /*
-      Search for SOL transfer
+      Search SOL transfer
       */
 
       let verifiedAmount = 0;
-
       let verifiedMerchant = false;
 
-      let foundTransfer = false;
-
-
       const instructions =
-        transaction.transaction
-          .message
-          .instructions;
-
+        transaction.transaction.message.instructions;
 
       for (
-        const instruction
-        of instructions
+        const instruction of instructions
       ) {
 
         if (
@@ -300,39 +269,27 @@ app.post(
             verifiedAmount =
               lamports / 1000000000;
 
-            foundTransfer = true;
-
             break;
-
           }
-
         }
-
       }
 
-
       /*
-      Check merchant
+      Merchant verification
       */
 
       if (!verifiedMerchant) {
 
         return res.json({
-
           paid: false,
-
           status: "InvalidMerchant",
-
           error:
             "Payment was not sent to the SolPay merchant wallet"
-
         });
-
       }
 
-
       /*
-      Check amount
+      Amount verification
       */
 
       const expected =
@@ -348,43 +305,18 @@ app.post(
       ) {
 
         return res.json({
-
           paid: false,
-
           status: "InvalidAmount",
-
           expected,
-
-          received:
-            verifiedAmount,
-
+          received: verifiedAmount,
           error:
             "Transaction amount does not match Payment ID"
-
         });
-
       }
 
-
       /*
-      Payment ID verification
+      SUCCESS
       */
-
-      /*
-      The Payment ID is encoded in the
-      transaction memo in the production
-      version.
-
-      For the current Devnet MVP we require
-      the signature to be submitted against
-      the specific Payment ID and verify
-      amount + merchant + transaction.
-
-      We will add an on-chain Memo instruction
-      next so Payment ID is cryptographically
-      attached to the transaction.
-      */
-
 
       payment.signature =
         signature;
@@ -398,12 +330,10 @@ app.post(
       payment.verifiedAt =
         new Date().toISOString();
 
-
       payments.set(
         payment.paymentId,
         payment
       );
-
 
       return res.json({
 
@@ -420,8 +350,10 @@ app.post(
           verifiedAmount,
 
         merchant:
-          MERCHANT
+          MERCHANT,
 
+        network:
+          "Solana Devnet"
       });
 
     } catch (error) {
@@ -432,16 +364,11 @@ app.post(
       );
 
       return res.status(500).json({
-
         paid: false,
-
         error:
           "Verification failed"
-
       });
-
     }
-
   }
 );
 
